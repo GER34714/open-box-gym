@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -126,11 +128,12 @@
     }
     .card-pad{padding:18px;}
 
+    /* HERO KICKER: SIN OPACIDAD (texto full blanco) */
     .kicker{
       display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.20);
-      background:rgba(0,0,0,0.38);
-      color:rgba(255,255,255,0.92);
+      padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);
+      background:rgba(0,0,0,0.42);
+      color:#ffffff;
       font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
     }
 
@@ -147,7 +150,7 @@
       filter:contrast(1.03) saturate(1.03);
     }
 
-    /* overlay suave (desktop/tablet) */
+    /* overlay suave (desktop/tablet) + no bloquea clicks */
     .hero-left::after{
       content:"";
       position:absolute;
@@ -167,30 +170,31 @@
       padding:20px;
     }
 
-    /* panel de lectura: el que garantiza que se lea, sin opacar el texto */
+    /* panel para lectura (no afecta opacidad del texto) */
     .hero-panel{
       width:min(760px, 100%);
       border-radius:18px;
       padding:16px 16px;
-      background:rgba(0,0,0,0.58);
+      background:rgba(0,0,0,0.62);
       border:1px solid rgba(255,255,255,0.16);
       box-shadow:0 18px 44px rgba(0,0,0,0.45);
       backdrop-filter: blur(6px);
     }
 
+    /* HERO TEXTOS: SIN OPACIDAD */
     .hero-title{
       font-size:clamp(22px,3.2vw,40px);
       margin:10px 0 0;
       letter-spacing:-0.6px;
       color:#ffffff;
-      text-shadow:0 12px 30px rgba(0,0,0,0.78);
+      text-shadow:0 14px 36px rgba(0,0,0,0.86);
     }
     .hero-sub{
       margin:10px 0 0;
-      color:rgba(255,255,255,0.92);
+      color:#ffffff;
       font-size:14px;line-height:1.55;
       max-width:58ch;
-      text-shadow:0 12px 30px rgba(0,0,0,0.78);
+      text-shadow:0 14px 36px rgba(0,0,0,0.86);
     }
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
 
@@ -310,19 +314,19 @@
       /* HERO MAS GRANDE EN MOVILES */
       .hero-left{min-height: 520px;}
 
-      /* SOLO EN MOVILES: SIN OPACIDAD / SIN OVERLAY DEL HERO */
-      .hero-left::after{background: none !important;}
+      /* SOLO EN MOVILES: SIN OVERLAY DEL HERO */
+      .hero-left::after{background:none !important;}
 
-      /* SOLO EN MOVILES: que la foto se vea mas "limpia" */
+      /* SOLO EN MOVILES: foto mas limpia */
       .hero-left img{
-        transform: scale(1.06);
-        filter: none;
+        transform:scale(1.06);
+        filter:none;
       }
 
-      /* texto siempre claro: el panel se encarga */
+      /* panel mantiene contraste para texto full blanco */
       .hero-panel{
         padding:14px 14px;
-        background: rgba(0,0,0,0.62);
+        background:rgba(0,0,0,0.60);
         backdrop-filter: blur(6px);
       }
 
@@ -337,8 +341,6 @@
       .brand img{width:40px;height:40px;}
       .btn{padding:10px 12px;}
       .float-ig{right:12px;bottom:12px;}
-
-      /* un poquito mas de hero en celulares chicos */
       .hero-left{min-height: 560px;}
     }
   </style>
@@ -566,3 +568,4 @@
   </script>
 </body>
 </html>
+
