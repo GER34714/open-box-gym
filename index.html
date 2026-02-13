@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -29,7 +30,7 @@
       --radius:18px;
       --maxw:1120px;
 
-      /* cards mas opacas (la opacidad va en las cards, no en el overlay) */
+      /* opacidad en tarjetas, no en overlay */
       --card:rgba(10,10,14,0.82);
     }
 
@@ -128,9 +129,9 @@
 
     .kicker{
       display:inline-flex;align-items:center;gap:8px;
-      padding:6px 10px;border-radius:999px;border:1px solid var(--border);
-      background:rgba(255,255,255,0.08);
-      color:rgba(255,255,255,0.86);
+      padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.20);
+      background:rgba(0,0,0,0.38);
+      color:rgba(255,255,255,0.92);
       font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
     }
 
@@ -144,28 +145,41 @@
     .hero-left img{
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:cover;transform:scale(1.02);
-      filter:contrast(1.05) saturate(1.05);
+      filter:contrast(1.03) saturate(1.03);
     }
+
+    /* MODIFICACION CLAVE:
+       1) overlay del hero MUCHO mas suave
+       2) pointer-events none para que no bloquee clicks del boton
+    */
     .hero-left::after{
-      content:"";position:absolute;inset:0;
-      /* oscurece solo lo justo para que el texto se lea */
-      background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.22), rgba(0,0,0,0.66));
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.12), rgba(0,0,0,0.38));
     }
+
     .hero-content{
-      position:relative;height:100%;
-      display:flex;flex-direction:column;justify-content:flex-end;
+      position:relative;
+      z-index:2;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
       padding:20px;
     }
 
-    /* PANEL DE LECTURA para que el texto NO quede opaco */
+    /* panel de lectura SIN opacity (solo background rgba) para texto NITIDO */
     .hero-panel{
       width:min(760px, 100%);
-      border-radius: 18px;
-      padding: 16px 16px;
-      background: rgba(0,0,0,0.52);
-      border: 1px solid rgba(255,255,255,0.16);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+      border-radius:18px;
+      padding:16px 16px;
+      background:rgba(0,0,0,0.58);
+      border:1px solid rgba(255,255,255,0.16);
+      box-shadow:0 18px 44px rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
     }
 
     .hero-title{
@@ -173,14 +187,14 @@
       margin:10px 0 0;
       letter-spacing:-0.6px;
       color:#ffffff;
-      text-shadow: 0 12px 30px rgba(0,0,0,0.70);
+      text-shadow:0 12px 30px rgba(0,0,0,0.78);
     }
     .hero-sub{
       margin:10px 0 0;
-      color: rgba(255,255,255,0.92);
+      color:rgba(255,255,255,0.92);
       font-size:14px;line-height:1.55;
       max-width:58ch;
-      text-shadow: 0 12px 30px rgba(0,0,0,0.70);
+      text-shadow:0 12px 30px rgba(0,0,0,0.78);
     }
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
 
@@ -199,7 +213,7 @@
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       flex:0 0 auto;
     }
-    .li strong{display:block;font-size:13px;letter-spacing:0.2px;margin-bottom:2px;}
+    .li strong{display:block;font-size:13px;letter-spacing:0.2px;margin-bottom:2px;color:#fff;}
     .li span{display:block;font-size:12px;color:var(--muted);line-height:1.35;}
 
     .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
@@ -336,6 +350,7 @@
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
           <img src="https://iili.io/qHOTGgp.png" alt="Open Box - entrenamiento" />
+
           <div class="hero-content">
             <div class="hero-panel">
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
@@ -533,4 +548,4 @@
   </script>
 </body>
 </html>
-
+```
