@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -30,8 +28,6 @@
       --shadow:0 16px 40px rgba(0,0,0,0.45);
       --radius:18px;
       --maxw:1120px;
-
-      /* opacidad en tarjetas, no en overlay */
       --card:rgba(10,10,14,0.82);
     }
 
@@ -43,10 +39,9 @@
       color:var(--txt);
       background:var(--bg);
       overflow-x:hidden;
-      padding-bottom: 40px;
+      padding-bottom:40px;
     }
 
-    /* OVERLAY CLARO */
     .bg-overlay{
       position:fixed;
       inset:0;
@@ -70,7 +65,6 @@
     a{color:inherit;text-decoration:none;}
     .wrap{width:min(var(--maxw),calc(100% - 32px));margin:0 auto;}
 
-    /* HEADER */
     .header{
       position:sticky;top:0;z-index:50;
       backdrop-filter:blur(10px);
@@ -113,12 +107,10 @@
     }
     .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
-    /* SECTIONS */
     main{padding:26px 0 0;}
     section{padding:30px 0;}
-    .grid{display:grid;gap:22px;}
+    .grid{display:grid;gap:28px;} /* MAS AIRE */
 
-    /* CARDS */
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -128,7 +120,6 @@
     }
     .card-pad{padding:18px;}
 
-    /* HERO KICKER: SIN OPACIDAD (texto full blanco) */
     .kicker{
       display:inline-flex;align-items:center;gap:8px;
       padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);
@@ -137,7 +128,6 @@
       font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
     }
 
-    /* HERO */
     .hero{display:grid;gap:22px;align-items:stretch;grid-template-columns:1.15fr 0.85fr;}
     .hero-left{
       position:relative;min-height:360px;border-radius:calc(var(--radius) + 4px);
@@ -146,31 +136,26 @@
     }
     .hero-left img{
       position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;transform:scale(1.02);
+      object-fit:cover;
+      object-position:center 25%;
+      transform:scale(1.02);
       filter:contrast(1.03) saturate(1.03);
     }
 
-    /* overlay suave (desktop/tablet) + no bloquea clicks */
     .hero-left::after{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute;inset:0;
       pointer-events:none;
-      background:
-        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.12), rgba(0,0,0,0.38));
+      background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.12), rgba(0,0,0,0.38));
     }
 
     .hero-content{
-      position:relative;
-      z-index:2;
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
+      position:relative;z-index:2;height:100%;
+      display:flex;flex-direction:column;justify-content:flex-end;
       padding:20px;
     }
 
-    /* panel para lectura (no afecta opacidad del texto) */
+    /* PANEL (desktop): con fondo para leer */
     .hero-panel{
       width:min(760px, 100%);
       border-radius:18px;
@@ -181,7 +166,7 @@
       backdrop-filter: blur(6px);
     }
 
-    /* HERO TEXTOS: SIN OPACIDAD */
+    /* TEXTOS: sin opacidad */
     .hero-title{
       font-size:clamp(22px,3.2vw,40px);
       margin:10px 0 0;
@@ -198,7 +183,7 @@
     }
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
 
-    .side{display:grid;gap:22px;height:100%;}
+    .side{display:grid;gap:28px;height:100%;} /* MAS AIRE */
     .side .card{height:100%;}
 
     .list{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:12px;}
@@ -216,13 +201,12 @@
     .li strong{display:block;font-size:13px;letter-spacing:0.2px;margin-bottom:2px;color:#fff;}
     .li span{display:block;font-size:12px;color:var(--muted);line-height:1.35;}
 
-    .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
-    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
+    .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;} /* MAS AIRE */
+    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;} /* MAS AIRE */
 
     .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;color:#fff;}
     .p{margin:0;color:rgba(255,255,255,0.78);font-size:13px;line-height:1.6;}
 
-    /* HORARIOS */
     .hours{display:grid;gap:12px;margin-top:12px;}
     .hour{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -233,7 +217,6 @@
     .hour strong{font-size:13px;color:#fff;}
     .hour span{font-size:13px;color:rgba(255,255,255,0.90);}
 
-    /* GALERIA */
     .gallery{display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px;margin-top:14px!important;}
     .g-item{
       position:relative;border-radius:calc(var(--radius) + 2px);
@@ -242,7 +225,6 @@
     }
     .g-item img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);}
 
-    /* MAP */
     .map{
       border-radius:calc(var(--radius) + 2px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
@@ -270,34 +252,23 @@
       border-bottom:1px dashed rgba(255,255,255,0.30);
     }
 
-    /* FLOAT IG (no tapa footer) */
     .float-ig{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 60;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.62);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 44px rgba(0,0,0,0.45);
-      color: rgba(255,255,255,0.92);
-      max-width: calc(100vw - 32px);
-      transition: opacity .15s ease, transform .15s ease;
+      position: fixed;right:16px;bottom:16px;z-index:60;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.62);
+      backdrop-filter:blur(10px);
+      box-shadow:0 18px 44px rgba(0,0,0,0.45);
+      color:rgba(255,255,255,0.92);
+      max-width:calc(100vw - 32px);
+      transition:opacity .15s ease, transform .15s ease;
     }
-    .float-ig.is-hidden{
-      opacity: 0;
-      transform: translateY(12px);
-      pointer-events: none;
-    }
+    .float-ig.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
     .ig-badge{
       width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
-      background: linear-gradient(135deg, rgba(245,133,41,0.95), rgba(221,42,123,0.9), rgba(129,52,175,0.9), rgba(81,91,212,0.9));
-      border: 1px solid rgba(255,255,255,0.18);
+      background:linear-gradient(135deg, rgba(245,133,41,0.95), rgba(221,42,123,0.9), rgba(129,52,175,0.9), rgba(81,91,212,0.9));
+      border:1px solid rgba(255,255,255,0.18);
       flex:0 0 auto;
     }
     .ig-badge svg{width:18px;height:18px;}
@@ -305,30 +276,36 @@
     .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-    /* RESPONSIVE */
     @media (max-width: 920px){
       main{padding-top:22px;}
       section{padding:26px 0;}
       .hero{grid-template-columns:1fr;}
 
       /* HERO MAS GRANDE EN MOVILES */
-      .hero-left{min-height: 520px;}
+      .hero-left{min-height:560px;}
 
-      /* SOLO EN MOVILES: SIN OVERLAY DEL HERO */
-      .hero-left::after{background:none !important;}
-
-      /* SOLO EN MOVILES: foto mas limpia */
+      /* cortar mas arriba la imagen (mostrar mas parte superior) */
       .hero-left img{
-        transform:scale(1.06);
+        object-position:center 10%;
+        transform:scale(1.08);
         filter:none;
       }
 
-      /* panel mantiene contraste para texto full blanco */
+      /* SOLO EN MOVILES: sin overlay del hero */
+      .hero-left::after{background:none !important;}
+
+      /* SOLO EN MOVILES: SACAR OPACIDAD DEL PANEL (queda transparente) */
       .hero-panel{
-        padding:14px 14px;
-        background:rgba(0,0,0,0.60);
-        backdrop-filter: blur(6px);
+        background:transparent !important;
+        border:none !important;
+        box-shadow:none !important;
+        backdrop-filter:none !important;
+        padding:0 !important;
       }
+
+      /* mantener lectura sin panel: sombra mas fuerte */
+      .hero-title{ text-shadow:0 18px 50px rgba(0,0,0,0.92); }
+      .hero-sub{ text-shadow:0 18px 50px rgba(0,0,0,0.92); }
 
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
@@ -341,7 +318,7 @@
       .brand img{width:40px;height:40px;}
       .btn{padding:10px 12px;}
       .float-ig{right:12px;bottom:12px;}
-      .hero-left{min-height: 560px;}
+      .hero-left{min-height:600px;}
     }
   </style>
 </head>
@@ -370,7 +347,6 @@
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
           <img src="https://iili.io/qHOTGgp.png" alt="Open Box - entrenamiento" />
-
           <div class="hero-content">
             <div class="hero-panel">
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
@@ -533,7 +509,6 @@
     </div>
   </footer>
 
-  <!-- Boton flotante Instagram (se oculta cuando aparece el footer) -->
   <a class="float-ig" id="floatIg" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Abrir Instagram">
     <span class="ig-badge" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none">
@@ -568,4 +543,3 @@
   </script>
 </body>
 </html>
-
