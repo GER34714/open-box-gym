@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -148,10 +147,7 @@
       filter:contrast(1.03) saturate(1.03);
     }
 
-    /* MODIFICACION CLAVE:
-       1) overlay del hero MUCHO mas suave
-       2) pointer-events none para que no bloquee clicks del boton
-    */
+    /* overlay suave (desktop/tablet) */
     .hero-left::after{
       content:"";
       position:absolute;
@@ -171,7 +167,7 @@
       padding:20px;
     }
 
-    /* panel de lectura SIN opacity (solo background rgba) para texto NITIDO */
+    /* panel de lectura: el que garantiza que se lea, sin opacar el texto */
     .hero-panel{
       width:min(760px, 100%);
       border-radius:18px;
@@ -310,18 +306,40 @@
       main{padding-top:22px;}
       section{padding:26px 0;}
       .hero{grid-template-columns:1fr;}
-      .hero-left{min-height:320px;}
+
+      /* HERO MAS GRANDE EN MOVILES */
+      .hero-left{min-height: 520px;}
+
+      /* SOLO EN MOVILES: SIN OPACIDAD / SIN OVERLAY DEL HERO */
+      .hero-left::after{background: none !important;}
+
+      /* SOLO EN MOVILES: que la foto se vea mas "limpia" */
+      .hero-left img{
+        transform: scale(1.06);
+        filter: none;
+      }
+
+      /* texto siempre claro: el panel se encarga */
+      .hero-panel{
+        padding:14px 14px;
+        background: rgba(0,0,0,0.62);
+        backdrop-filter: blur(6px);
+      }
+
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
       .gallery{grid-template-columns:1fr;}
       .g-item{min-height:240px;}
       .map iframe{height:240px;}
-      .hero-panel{padding:14px 14px;}
     }
+
     @media (max-width: 420px){
       .brand img{width:40px;height:40px;}
       .btn{padding:10px 12px;}
       .float-ig{right:12px;bottom:12px;}
+
+      /* un poquito mas de hero en celulares chicos */
+      .hero-left{min-height: 560px;}
     }
   </style>
 </head>
@@ -548,4 +566,3 @@
   </script>
 </body>
 </html>
-```
