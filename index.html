@@ -29,7 +29,7 @@
       --radius:18px;
       --maxw:1120px;
 
-      /* cards mas opacas para que el overlay se vea mas */
+      /* cards mas opacas (la opacidad va en las cards, no en el overlay) */
       --card:rgba(10,10,14,0.82);
     }
 
@@ -41,10 +41,10 @@
       color:var(--txt);
       background:var(--bg);
       overflow-x:hidden;
-      padding-bottom: 40px; /* ya no hace falta reservar por el flotante */
+      padding-bottom: 40px;
     }
 
-    /* OVERLAY MAS CLARO (sin opacidad arriba, solo un tinte suave para legibilidad) */
+    /* OVERLAY CLARO */
     .bg-overlay{
       position:fixed;
       inset:0;
@@ -59,7 +59,6 @@
       content:"";
       position:absolute;
       inset:0;
-      /* mucho mas liviano: deja ver el overlay, solo mejora contraste */
       background:
         radial-gradient(1200px 600px at 20% 0%, rgba(0,0,0,0.12), rgba(0,0,0,0.32)),
         linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
@@ -108,7 +107,7 @@
     .btn-primary{
       background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
       border-color:rgba(255,255,255,0.20);
-      color:#0b0b0d;font-weight:700;
+      color:#0b0b0d;font-weight:800;
     }
     .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
@@ -117,7 +116,7 @@
     section{padding:30px 0;}
     .grid{display:grid;gap:22px;}
 
-    /* CARDS: opacidad aca, no en el overlay */
+    /* CARDS */
     .card{
       background:var(--card);
       border:1px solid var(--border);
@@ -130,8 +129,9 @@
     .kicker{
       display:inline-flex;align-items:center;gap:8px;
       padding:6px 10px;border-radius:999px;border:1px solid var(--border);
-      background:rgba(255,255,255,0.06);
-      color:var(--muted);font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
+      background:rgba(255,255,255,0.08);
+      color:rgba(255,255,255,0.86);
+      font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
     }
 
     /* HERO */
@@ -148,24 +148,41 @@
     }
     .hero-left::after{
       content:"";position:absolute;inset:0;
-      background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.28), rgba(0,0,0,0.78));
+      /* oscurece solo lo justo para que el texto se lea */
+      background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.22), rgba(0,0,0,0.66));
     }
     .hero-content{
       position:relative;height:100%;
       display:flex;flex-direction:column;justify-content:flex-end;
-      padding:20px;gap:12px;
+      padding:20px;
     }
+
+    /* PANEL DE LECTURA para que el texto NO quede opaco */
+    .hero-panel{
+      width:min(760px, 100%);
+      border-radius: 18px;
+      padding: 16px 16px;
+      background: rgba(0,0,0,0.52);
+      border: 1px solid rgba(255,255,255,0.16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.45);
+    }
+
     .hero-title{
-      font-size:clamp(22px,3.2vw,38px);
-      margin:0;letter-spacing:-0.5px;
-      text-shadow:0 10px 26px rgba(0,0,0,0.55);
+      font-size:clamp(22px,3.2vw,40px);
+      margin:10px 0 0;
+      letter-spacing:-0.6px;
+      color:#ffffff;
+      text-shadow: 0 12px 30px rgba(0,0,0,0.70);
     }
     .hero-sub{
-      margin:0;color:rgba(255,255,255,0.82);
-      font-size:14px;line-height:1.45;max-width:52ch;
-      text-shadow:0 10px 26px rgba(0,0,0,0.55);
+      margin:10px 0 0;
+      color: rgba(255,255,255,0.92);
+      font-size:14px;line-height:1.55;
+      max-width:58ch;
+      text-shadow: 0 12px 30px rgba(0,0,0,0.70);
     }
-    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px;}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
 
     .side{display:grid;gap:22px;height:100%;}
     .side .card{height:100%;}
@@ -188,8 +205,8 @@
     .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
     .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}
 
-    .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;}
-    .p{margin:0;color:var(--muted);font-size:13px;line-height:1.6;}
+    .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;color:#fff;}
+    .p{margin:0;color:rgba(255,255,255,0.78);font-size:13px;line-height:1.6;}
 
     /* HORARIOS */
     .hours{display:grid;gap:12px;margin-top:12px;}
@@ -199,8 +216,8 @@
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.10);
     }
-    .hour strong{font-size:13px;}
-    .hour span{font-size:13px;color:rgba(255,255,255,0.86);}
+    .hour strong{font-size:13px;color:#fff;}
+    .hour span{font-size:13px;color:rgba(255,255,255,0.90);}
 
     /* GALERIA */
     .gallery{display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px;margin-top:14px!important;}
@@ -220,9 +237,9 @@
     .map iframe{width:100%;height:250px;border:0;display:block;}
     .addr{
       margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-      color:rgba(255,255,255,0.88);font-size:13px;
+      color:rgba(255,255,255,0.90);font-size:13px;
     }
-    .addr small{color:var(--muted);}
+    .addr small{color:rgba(255,255,255,0.72);}
 
     footer{
       padding:26px 0 38px;
@@ -235,7 +252,7 @@
       color:var(--muted);font-size:12px;
     }
     .footer-inner a{
-      color:rgba(255,255,255,0.85);
+      color:rgba(255,255,255,0.90);
       border-bottom:1px dashed rgba(255,255,255,0.30);
     }
 
@@ -272,7 +289,7 @@
     .ig-badge svg{width:18px;height:18px;}
     .float-ig .t{display:flex;flex-direction:column;line-height:1.05;min-width:0;}
     .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .float-ig .t span{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
     /* RESPONSIVE */
     @media (max-width: 920px){
@@ -285,6 +302,7 @@
       .gallery{grid-template-columns:1fr;}
       .g-item{min-height:240px;}
       .map iframe{height:240px;}
+      .hero-panel{padding:14px 14px;}
     }
     @media (max-width: 420px){
       .brand img{width:40px;height:40px;}
@@ -319,14 +337,16 @@
         <div class="hero-left" aria-label="Hero">
           <img src="https://iili.io/qHOTGgp.png" alt="Open Box - entrenamiento" />
           <div class="hero-content">
-            <span class="kicker">Funcional · CrossFit · Personalizado</span>
-            <h1 class="hero-title">Entrena con seguimiento real</h1>
-            <p class="hero-sub">
-              Clases guiadas de lunes a viernes. Te ubicamos segun tu nivel y objetivo para que sostengas el plan.
-            </p>
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
-              <a class="btn" href="#horarios">Ver horarios</a>
+            <div class="hero-panel">
+              <span class="kicker">Funcional · CrossFit · Personalizado</span>
+              <h1 class="hero-title">Entrena con seguimiento real</h1>
+              <p class="hero-sub">
+                Clases guiadas de lunes a viernes. Te ubicamos segun tu nivel y objetivo para que sostengas el plan.
+              </p>
+              <div class="hero-cta">
+                <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
+                <a class="btn" href="#horarios">Ver horarios</a>
+              </div>
             </div>
           </div>
         </div>
@@ -478,7 +498,7 @@
     </div>
   </footer>
 
-  <!-- Boton flotante Instagram (se oculta cuando el footer entra en pantalla) -->
+  <!-- Boton flotante Instagram (se oculta cuando aparece el footer) -->
   <a class="float-ig" id="floatIg" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Abrir Instagram">
     <span class="ig-badge" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none">
@@ -496,7 +516,6 @@
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Oculta el boton flotante cuando aparece el footer (no tapa el footer)
     (function(){
       var footer = document.getElementById("footer");
       var floatIg = document.getElementById("floatIg");
@@ -514,4 +533,4 @@
   </script>
 </body>
 </html>
-```
+
