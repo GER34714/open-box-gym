@@ -109,7 +109,7 @@
 
     main{padding:26px 0 0;}
     section{padding:30px 0;}
-    .grid{display:grid;gap:28px;} /* MAS AIRE */
+    .grid{display:grid;gap:28px;}
 
     .card{
       background:var(--card);
@@ -134,12 +134,13 @@
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
       background:rgba(255,255,255,0.04);
     }
-    .hero-left img{
+
+    .hero-left video{
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:cover;
       object-position:center 25%;
       transform:scale(1.02);
-      filter:contrast(1.03) saturate(1.03);
+      background:#000;
     }
 
     .hero-left::after{
@@ -155,7 +156,6 @@
       padding:20px;
     }
 
-    /* PANEL (desktop): con fondo para leer */
     .hero-panel{
       width:min(760px, 100%);
       border-radius:18px;
@@ -166,7 +166,6 @@
       backdrop-filter: blur(6px);
     }
 
-    /* TEXTOS: sin opacidad */
     .hero-title{
       font-size:clamp(22px,3.2vw,40px);
       margin:10px 0 0;
@@ -183,7 +182,7 @@
     }
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
 
-    .side{display:grid;gap:28px;height:100%;} /* MAS AIRE */
+    .side{display:grid;gap:28px;height:100%;}
     .side .card{height:100%;}
 
     .list{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:12px;}
@@ -201,8 +200,8 @@
     .li strong{display:block;font-size:13px;letter-spacing:0.2px;margin-bottom:2px;color:#fff;}
     .li span{display:block;font-size:12px;color:var(--muted);line-height:1.35;}
 
-    .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;} /* MAS AIRE */
-    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;} /* MAS AIRE */
+    .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;}
 
     .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;color:#fff;}
     .p{margin:0;color:rgba(255,255,255,0.78);font-size:13px;line-height:1.6;}
@@ -224,6 +223,20 @@
       background:rgba(255,255,255,0.04);min-height:290px;
     }
     .g-item img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);}
+
+    .vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px!important;}
+    .v-item{
+      position:relative;border-radius:calc(var(--radius) + 2px);
+      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
+      background:rgba(255,255,255,0.04);
+      aspect-ratio:16/9;
+    }
+    .v-item video{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      background:#000;
+    }
 
     .map{
       border-radius:calc(var(--radius) + 2px);
@@ -281,20 +294,13 @@
       section{padding:26px 0;}
       .hero{grid-template-columns:1fr;}
 
-      /* HERO MAS GRANDE EN MOVILES */
       .hero-left{min-height:560px;}
-
-      /* cortar mas arriba la imagen (mostrar mas parte superior) */
-      .hero-left img{
+      .hero-left video{
         object-position:center 10%;
         transform:scale(1.08);
-        filter:none;
       }
-
-      /* SOLO EN MOVILES: sin overlay del hero */
       .hero-left::after{background:none !important;}
 
-      /* SOLO EN MOVILES: SACAR OPACIDAD DEL PANEL (queda transparente) */
       .hero-panel{
         background:transparent !important;
         border:none !important;
@@ -302,14 +308,13 @@
         backdrop-filter:none !important;
         padding:0 !important;
       }
-
-      /* mantener lectura sin panel: sombra mas fuerte */
       .hero-title{ text-shadow:0 18px 50px rgba(0,0,0,0.92); }
       .hero-sub{ text-shadow:0 18px 50px rgba(0,0,0,0.92); }
 
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
       .gallery{grid-template-columns:1fr;}
+      .vgrid{grid-template-columns:1fr;}
       .g-item{min-height:240px;}
       .map iframe{height:240px;}
     }
@@ -346,7 +351,17 @@
     <section>
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
-          <img src="https://iili.io/qHOTGgp.png" alt="Open Box - entrenamiento" />
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="https://iili.io/qHOTGgp.png"
+          >
+            <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
+          </video>
+
           <div class="hero-content">
             <div class="hero-panel">
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
@@ -455,7 +470,8 @@
           <div class="card-pad">
             <span class="kicker">Galeria</span>
             <h2 class="h2" style="margin-top:10px;">El box en accion</h2>
-            <p class="p">Demo con fotos de referencia. Despues se reemplazan por fotos reales del lugar.</p>
+            <p class="p">Demo con fotos y videos de referencia. Despues se reemplazan por material real del lugar.</p>
+
             <div class="gallery">
               <div class="g-item">
                 <img src="https://iili.io/qHOT1qv.png" alt="Galeria Open Box 1" />
@@ -464,6 +480,15 @@
                 <img src="https://iili.io/qHOTE1R.png" alt="Galeria Open Box 2" />
               </div>
             </div>
+
+            <div class="vgrid">
+              <div class="v-item">
+                <video controls playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                  <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
