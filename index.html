@@ -97,7 +97,6 @@
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
 
-    /* APLICA LA FUENTE A TODO TEXTO "OPEN BOX" (header + hero) */
     .brand-name, .hero-brand{
       font-family:"CFCrackedStone", ui-sans-serif, system-ui, sans-serif;
       text-transform:uppercase;
@@ -149,13 +148,13 @@
 
     .hero{display:grid;gap:22px;align-items:stretch;grid-template-columns:1.15fr 0.85fr;}
     .hero-left{
-      position:relative;min-height:380px;border-radius:calc(var(--radius) + 4px);
+      position:relative;min-height:420px;border-radius:calc(var(--radius) + 4px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
       background:rgba(255,255,255,0.04);
     }
     .hero-left .hero-bg{
       position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;object-position:center 20%;
+      object-fit:cover;object-position:center 18%;
       transform:scale(1.03);
       background:#000;display:block;
     }
@@ -164,11 +163,12 @@
       background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.10), rgba(0,0,0,0.34));
     }
 
-    /* CENTRADO VERTICAL EN EL HERO */
+    /* CAMBIO: en PC el texto baja mas abajo */
     .hero-content{
       position:relative;z-index:2;height:100%;
-      display:flex;flex-direction:column;justify-content:center;
-      padding:20px;
+      display:flex;flex-direction:column;justify-content:flex-end;
+      padding:22px;
+      padding-bottom:28px;
     }
 
     .hero-panel{
@@ -224,6 +224,30 @@
     .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;}
     .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;color:#fff;}
     .p{margin:0;color:rgba(255,255,255,0.78);font-size:13px;line-height:1.6;}
+
+    /* NUEVO: card de servicio con imagen */
+    .svc-img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+      background:#000;
+      border-bottom:1px solid rgba(255,255,255,0.10);
+    }
+    .svc-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-top:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.38);
+      color:rgba(255,255,255,0.92);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:0.4px;
+    }
 
     .hours{display:grid;gap:12px;margin-top:12px;}
     .hour{
@@ -282,11 +306,12 @@
       backdrop-filter:blur(8px);
     }
 
+    /* CAMBIO: carrusel calzado al alto de la card */
     .carousel{
       position:relative;
       border-radius:calc(var(--radius) + 2px);
       overflow:hidden;
-      margin-top:6px;
+      margin-top:10px;
     }
     .carousel-track{
       display:flex;
@@ -301,21 +326,20 @@
     .carousel-track::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18);border-radius:999px;}
     .slide{
       scroll-snap-align:start;
-      flex:0 0 66%;
-      max-width:66%;
+      flex:0 0 52%;
+      max-width:52%;
       border-radius:18px;
       overflow:hidden;
       border:1px solid var(--border);
       box-shadow:var(--shadow);
       background:rgba(255,255,255,0.04);
-      min-height:320px;
+      height:280px;
       position:relative;
     }
     .slide img{
       width:100%;height:100%;
       object-fit:cover;
       display:block;
-      transform:scale(1.01);
     }
 
     .car-btn{
@@ -422,8 +446,10 @@
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
       .vgrid{grid-template-columns:1fr;}
-      .slide{flex-basis:88%;max-width:88%;min-height:260px;}
+      .slide{flex-basis:88%;max-width:88%;height:260px;}
+      .svc-img{height:210px;}
       .map iframe{height:240px;}
+      .hero-content{justify-content:center;padding-bottom:20px;}
     }
 
     @media (max-width: 420px){
@@ -463,9 +489,7 @@
           <div class="hero-content">
             <div class="hero-panel">
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
-
               <div class="hero-brand">OPEN BOX</div>
-
               <div class="hero-title">Gimnasio · 9 de Julio</div>
 
               <p class="hero-sub">
@@ -485,7 +509,6 @@
             <div class="card-pad">
               <h2 class="h2">Por que Open Box</h2>
               <p class="p">Una estructura simple para que arranques, mejores y no abandones.</p>
-
               <ul class="list">
                 <li class="li"><span class="dot"></span><div><strong>Clases guiadas</strong><span>Progresiones y tecnica, sin improvisar.</span></div></li>
                 <li class="li"><span class="dot"></span><div><strong>Plan segun tu objetivo</strong><span>Volver a moverte, bajar, ganar fuerza o rendimiento.</span></div></li>
@@ -509,11 +532,34 @@
       </div>
     </section>
 
-    <section>
+    <section id="servicios">
       <div class="grid cards-3">
-        <div class="card"><div class="card-pad"><h2 class="h2">Funcional</h2><p class="p">Entrenamiento completo para fuerza, movilidad y resistencia.</p></div></div>
-        <div class="card"><div class="card-pad"><h2 class="h2">CrossFit</h2><p class="p">WODs con tecnica y progresiones para cada nivel.</p></div></div>
-        <div class="card"><div class="card-pad"><h2 class="h2">Personalizado</h2><p class="p">Si buscas un plan mas a medida, lo armamos segun tu objetivo.</p></div></div>
+        <div class="card">
+          <img class="svc-img" src="https://iili.io/qJnX3Bt.webp" alt="Funcional Open Box" />
+          <div class="card-pad">
+            <span class="svc-badge">Servicio 1</span>
+            <h2 class="h2" style="margin-top:10px;">Funcional</h2>
+            <p class="p">Trabajo completo de fuerza, resistencia y movilidad. Ideal para empezar, sostener constancia y mejorar el estado fisico general.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="svc-img" src="https://iili.io/qJnw73X.webp" alt="CrossFit Open Box" />
+          <div class="card-pad">
+            <span class="svc-badge">Servicio 2</span>
+            <h2 class="h2" style="margin-top:10px;">CrossFit</h2>
+            <p class="p">WODs con tecnica y progresiones por nivel. Intensidad bien guiada para mejorar rendimiento y fuerza con control.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="svc-img" src="https://iili.io/qJnkDen.webp" alt="Personalizado Open Box" />
+          <div class="card-pad">
+            <span class="svc-badge">Servicio 3</span>
+            <h2 class="h2" style="margin-top:10px;">Personalizado</h2>
+            <p class="p">Plan a medida segun tu objetivo (bajar, fuerza, rendimiento). Acompañamiento y ajustes para que avances semana a semana.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -544,7 +590,7 @@
               <div class="media-head">
                 <div class="left">
                   <h3>Videos + fotos</h3>
-                  <p>Videos sin sonido por defecto (muted) y completos (sin recorte). Fotos grandes en carrusel.</p>
+                  <p>Videos sin sonido por defecto (muted) y completos (sin recorte). Fotos calzadas a la card.</p>
                 </div>
                 <div class="counter" id="photoCounter">1/7</div>
               </div>
