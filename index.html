@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -352,6 +353,18 @@
     }
     .map iframe{width:100%;height:230px;border:0;display:block;}
 
+    .mini-link{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.06);
+      color:rgba(255,255,255,0.90);
+      font-size:13px;
+    }
+    .mini-link:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.16);}
+
     .carousel{
       position:relative;
       border-radius:calc(var(--radius) + 4px);
@@ -431,7 +444,6 @@
       border-color:rgba(255,255,255,0.22);
     }
 
-    /* HORARIOS */
     .hours-wrap{display:grid;gap:14px;margin-top:14px;}
     .hours-top{
       display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
@@ -470,6 +482,16 @@
       color:rgba(255,255,255,0.92);
       text-transform:uppercase;
       letter-spacing:0.8px;
+    }
+    .hours-note{
+      color:rgba(255,255,255,0.76);
+      font-size:13px;
+      line-height:1.55;
+      margin:2px 0 0;
+    }
+    .hours-note a{
+      color:rgba(255,255,255,0.92);
+      border-bottom:1px dashed rgba(255,255,255,0.30);
     }
 
     footer{
@@ -576,6 +598,7 @@
     <a href="#servicios" data-close>Servicios <span>›</span></a>
     <a href="#horarios" data-close>Horarios <span>›</span></a>
     <a href="#galeria" data-close>Galeria <span>›</span></a>
+    <a href="#mapa" data-close>Mapa <span>›</span></a>
     <a href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" data-close>Instagram <span>↗</span></a>
   </aside>
 
@@ -602,7 +625,6 @@
               <div class="hero-cta">
                 <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
                 <a class="btn" href="#horarios">Ver horarios</a>
-                <a class="btn" href="#galeria">Ver galeria</a>
               </div>
             </div>
           </div>
@@ -685,9 +707,9 @@
               <li class="hour-row"><span class="hour-time">20:30 HS</span><span class="hour-name">CrossFit</span></li>
             </ul>
 
-            <div>
-              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
-            </div>
+            <p class="hours-note">
+              Para consultas y cupos: <a href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">@gimnasio.openbox</a>
+            </p>
           </div>
         </div>
       </div>
@@ -695,23 +717,7 @@
 
     <section id="galeria">
       <div class="grid cards-2">
-        <div class="card">
-          <div class="card-pad">
-            <span class="kicker">Ubicacion</span>
-            <div class="map" aria-label="Mapa">
-              <iframe
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
-                title="Mapa">
-              </iframe>
-            </div>
-            <div style="margin-top:12px;">
-              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
-            </div>
-          </div>
-        </div>
-
+        <!-- GALERIA PRIMERO -->
         <div class="card">
           <div class="card-pad">
             <span class="kicker">Galeria</span>
@@ -750,6 +756,25 @@
             <div style="margin-top:14px;">
               <a class="btn" href="#inicio">Volver arriba</a>
             </div>
+          </div>
+        </div>
+
+        <!-- MAPA ULTIMO -->
+        <div class="card" id="mapa">
+          <div class="card-pad">
+            <span class="kicker">Ubicacion</span>
+            <div class="map" aria-label="Mapa">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
+                title="Mapa">
+              </iframe>
+            </div>
+
+            <a class="mini-link" href="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires" target="_blank" rel="noopener">
+              Abrir en Google Maps →
+            </a>
           </div>
         </div>
       </div>
@@ -964,3 +989,4 @@
   </script>
 </body>
 </html>
+```
