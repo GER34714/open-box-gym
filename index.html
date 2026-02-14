@@ -78,7 +78,6 @@
       text-shadow:0 18px 60px rgba(0,0,0,0.92);
     }
 
-    /* NEON mas intenso: rojo + azul + verde */
     @keyframes neonPulse{
       0%{
         text-shadow:
@@ -153,7 +152,6 @@
     }
     .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
-    /* HAMBURGUESA (solo mobile) */
     .nav-actions{display:flex;align-items:center;gap:10px;}
     .burger{
       width:44px;height:44px;border-radius:999px;
@@ -323,8 +321,8 @@
     .li span{display:block;font-size:12px;color:var(--muted);line-height:1.35;}
 
     .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
-    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start;} /* CLAVE: no estirar alto */
-    .cards-2 > .card{align-self:start;} /* CLAVE: evita espacio muerto */
+    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start;}
+    .cards-2 > .card{align-self:start;}
     .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;color:#fff;}
     .p{margin:0;color:rgba(255,255,255,0.78);font-size:13px;line-height:1.6;}
 
@@ -352,7 +350,7 @@
       background:rgba(255,255,255,0.04);
       margin-top:12px;
     }
-    .map iframe{width:100%;height:230px;border:0;display:block;} /* un toque mas compacto */
+    .map iframe{width:100%;height:230px;border:0;display:block;}
 
     .carousel{
       position:relative;
@@ -362,12 +360,15 @@
       box-shadow:0 18px 44px rgba(0,0,0,0.40);
       background:rgba(0,0,0,0.70);
       margin-top:12px;
+      touch-action:pan-y;
+      user-select:none;
     }
     .track{
       display:flex;
       transition:transform .55s ease;
       will-change:transform;
     }
+    .track.is-dragging{transition:none;}
     .slide{
       min-width:100%;
       height:420px;
@@ -430,6 +431,47 @@
       border-color:rgba(255,255,255,0.22);
     }
 
+    /* HORARIOS */
+    .hours-wrap{display:grid;gap:14px;margin-top:14px;}
+    .hours-top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    }
+    .hours-pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(0,0,0,0.42);
+      color:rgba(255,255,255,0.90);
+      font-size:12px;letter-spacing:0.6px;text-transform:uppercase;
+    }
+    .hours-list{display:grid;gap:10px;margin:0;padding:0;list-style:none;}
+    .hour-row{
+      display:grid;
+      grid-template-columns: 120px 1fr;
+      gap:12px;
+      align-items:center;
+      padding:12px 12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.06);
+    }
+    .hour-time{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:8px 10px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(255,70,70,0.90), rgba(0,170,255,0.55));
+      border:1px solid rgba(255,255,255,0.16);
+      color:#fff;
+      font-weight:900;
+      letter-spacing:0.4px;
+    }
+    .hour-name{
+      font-size:14px;
+      color:rgba(255,255,255,0.92);
+      text-transform:uppercase;
+      letter-spacing:0.8px;
+    }
+
     footer{
       padding:26px 0 38px;border-top:1px solid var(--border);
       background:rgba(0,0,0,0.30);margin-top:18px;
@@ -480,6 +522,7 @@
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
       .ig-header-btn{display:none;}
+      .hour-row{grid-template-columns: 112px 1fr;}
     }
 
     @media (max-width: 520px){
@@ -531,6 +574,7 @@
     </div>
     <a href="#inicio" data-close>Inicio <span>›</span></a>
     <a href="#servicios" data-close>Servicios <span>›</span></a>
+    <a href="#horarios" data-close>Horarios <span>›</span></a>
     <a href="#galeria" data-close>Galeria <span>›</span></a>
     <a href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" data-close>Instagram <span>↗</span></a>
   </aside>
@@ -557,6 +601,7 @@
 
               <div class="hero-cta">
                 <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
+                <a class="btn" href="#horarios">Ver horarios</a>
                 <a class="btn" href="#galeria">Ver galeria</a>
               </div>
             </div>
@@ -622,6 +667,32 @@
       </div>
     </section>
 
+    <section id="horarios">
+      <div class="card">
+        <div class="card-pad">
+          <div class="hours-top">
+            <span class="kicker">Horarios</span>
+            <span class="hours-pill">Lunes a Viernes</span>
+          </div>
+
+          <div class="hours-wrap">
+            <ul class="hours-list">
+              <li class="hour-row"><span class="hour-time">08:00 HS</span><span class="hour-name">CrossFit</span></li>
+              <li class="hour-row"><span class="hour-time">09:15 HS</span><span class="hour-name">Funcional</span></li>
+              <li class="hour-row"><span class="hour-time">13:30 HS</span><span class="hour-name">Crosstraining</span></li>
+              <li class="hour-row"><span class="hour-time">18:00 HS</span><span class="hour-name">CrossFit</span></li>
+              <li class="hour-row"><span class="hour-time">19:15 HS</span><span class="hour-name">Open Box</span></li>
+              <li class="hour-row"><span class="hour-time">20:30 HS</span><span class="hour-name">CrossFit</span></li>
+            </ul>
+
+            <div>
+              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="galeria">
       <div class="grid cards-2">
         <div class="card">
@@ -645,7 +716,7 @@
           <div class="card-pad">
             <span class="kicker">Galeria</span>
             <h2 class="h2" style="margin-top:10px;">Fotos</h2>
-            <p class="p">Slider automatico en moviles. Siempre se ve la imagen completa dentro de la tarjeta.</p>
+            <p class="p">En moviles: automatico y tambien podes deslizar con el dedo.</p>
 
             <div class="carousel" id="carousel">
               <div class="track" id="track">
@@ -738,6 +809,11 @@
       var idx = 0;
       var timer = null;
 
+      var isDown = false;
+      var startX = 0;
+      var currentX = 0;
+      var moved = false;
+
       function isMobile(){
         return window.matchMedia && window.matchMedia("(max-width: 920px)").matches;
       }
@@ -795,10 +871,61 @@
       prev.addEventListener("click", function(){ prevSlide(); restart(); });
       next.addEventListener("click", function(){ nextSlide(); restart(); });
 
+      function pointerDown(clientX){
+        isDown = true;
+        moved = false;
+        startX = clientX;
+        currentX = clientX;
+        stop();
+        track.classList.add("is-dragging");
+      }
+      function pointerMove(clientX){
+        if(!isDown) return;
+        currentX = clientX;
+        if(Math.abs(currentX - startX) > 8) moved = true;
+      }
+      function pointerUp(){
+        if(!isDown) return;
+        isDown = false;
+        track.classList.remove("is-dragging");
+
+        var dx = currentX - startX;
+        var threshold = 60;
+
+        if(moved){
+          if(dx < -threshold) nextSlide();
+          else if(dx > threshold) prevSlide();
+        }
+
+        restart();
+      }
+
+      carousel.addEventListener("touchstart", function(e){
+        if(!e.touches || !e.touches[0]) return;
+        pointerDown(e.touches[0].clientX);
+      }, {passive:true});
+
+      carousel.addEventListener("touchmove", function(e){
+        if(!e.touches || !e.touches[0]) return;
+        pointerMove(e.touches[0].clientX);
+      }, {passive:true});
+
+      carousel.addEventListener("touchend", function(){
+        pointerUp();
+      }, {passive:true});
+
+      carousel.addEventListener("mousedown", function(e){
+        pointerDown(e.clientX);
+      });
+      window.addEventListener("mousemove", function(e){
+        pointerMove(e.clientX);
+      });
+      window.addEventListener("mouseup", function(){
+        pointerUp();
+      });
+
       carousel.addEventListener("mouseenter", stop);
       carousel.addEventListener("mouseleave", start);
-      carousel.addEventListener("touchstart", stop, {passive:true});
-      carousel.addEventListener("touchend", start, {passive:true});
       window.addEventListener("resize", function(){ restart(); });
 
       buildDots();
