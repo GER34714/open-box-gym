@@ -128,13 +128,13 @@
       font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
     }
 
+    /* HERO */
     .hero{display:grid;gap:22px;align-items:stretch;grid-template-columns:1.15fr 0.85fr;}
     .hero-left{
       position:relative;min-height:360px;border-radius:calc(var(--radius) + 4px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
       background:rgba(255,255,255,0.04);
     }
-
     .hero-left video{
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:cover;
@@ -142,7 +142,6 @@
       transform:scale(1.02);
       background:#000;
     }
-
     .hero-left::after{
       content:"";
       position:absolute;inset:0;
@@ -150,10 +149,12 @@
       background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.12), rgba(0,0,0,0.38));
     }
 
+    /* TODO ARRIBA */
     .hero-content{
       position:relative;z-index:2;height:100%;
-      display:flex;flex-direction:column;justify-content:flex-end;
+      display:flex;flex-direction:column;justify-content:flex-start;
       padding:20px;
+      padding-top:22px;
     }
 
     .hero-panel{
@@ -216,15 +217,19 @@
     .hour strong{font-size:13px;color:#fff;}
     .hour span{font-size:13px;color:rgba(255,255,255,0.90);}
 
-    .gallery{display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px;margin-top:14px!important;}
-    .g-item{
-      position:relative;border-radius:calc(var(--radius) + 2px);
-      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
-      background:rgba(255,255,255,0.04);min-height:290px;
+    /* GALERIA NUEVA: videos grandes + fotos chicas */
+    .media-layout{
+      display:grid;
+      grid-template-columns:1.35fr 0.65fr;
+      gap:16px;
+      margin-top:14px!important;
     }
-    .g-item img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);}
 
-    .vgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:14px!important;}
+    .vgrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
     .v-item{
       position:relative;border-radius:calc(var(--radius) + 2px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
@@ -237,7 +242,28 @@
       display:block;
       background:#000;
     }
+    .v-item.is-wide{grid-column:1 / -1; aspect-ratio:21/9;}
 
+    .photo-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      align-content:start;
+    }
+    .p-item{
+      position:relative;border-radius:14px;
+      overflow:hidden;border:1px solid var(--border);
+      background:rgba(255,255,255,0.04);
+      aspect-ratio:1/1;
+    }
+    .p-item img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.01);
+    }
+
+    /* MAP */
     .map{
       border-radius:calc(var(--radius) + 2px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
@@ -265,6 +291,7 @@
       border-bottom:1px dashed rgba(255,255,255,0.30);
     }
 
+    /* FLOAT IG */
     .float-ig{
       position: fixed;right:16px;bottom:16px;z-index:60;
       display:inline-flex;align-items:center;gap:10px;
@@ -301,6 +328,7 @@
       }
       .hero-left::after{background:none !important;}
 
+      /* en mobile: panel transparente (como lo querias) */
       .hero-panel{
         background:transparent !important;
         border:none !important;
@@ -313,9 +341,10 @@
 
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
-      .gallery{grid-template-columns:1fr;}
+
+      .media-layout{grid-template-columns:1fr;}
       .vgrid{grid-template-columns:1fr;}
-      .g-item{min-height:240px;}
+      .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
       .map iframe{height:240px;}
     }
 
@@ -351,14 +380,7 @@
     <section>
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="https://iili.io/qHOTGgp.png"
-          >
+          <video autoplay muted loop playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
             <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
           </video>
 
@@ -472,20 +494,20 @@
             <h2 class="h2" style="margin-top:10px;">El box en accion</h2>
             <p class="p">Demo con fotos y videos de referencia. Despues se reemplazan por material real del lugar.</p>
 
-            <div class="gallery">
-              <div class="g-item">
-                <img src="https://iili.io/qHOT1qv.png" alt="Galeria Open Box 1" />
+            <div class="media-layout">
+              <!-- VIDEOS GRANDES -->
+              <div class="vgrid">
+                <div class="v-item is-wide">
+                  <video controls playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
+                  </video>
+                </div>
               </div>
-              <div class="g-item">
-                <img src="https://iili.io/qHOTE1R.png" alt="Galeria Open Box 2" />
-              </div>
-            </div>
 
-            <div class="vgrid">
-              <div class="v-item">
-                <video controls playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                  <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
-                </video>
+              <!-- FOTOS CHICAS -->
+              <div class="photo-grid">
+                <div class="p-item"><img src="https://iili.io/qHOT1qv.png" alt="Galeria Open Box 1" /></div>
+                <div class="p-item"><img src="https://iili.io/qHOTE1R.png" alt="Galeria Open Box 2" /></div>
               </div>
             </div>
 
