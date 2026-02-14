@@ -49,7 +49,7 @@
       padding-bottom:46px;
     }
 
-    /* Overlay imagen (desktop: full) */
+    /* Fondo overlay IMAGEN (global) */
     .bg-overlay{
       position:fixed;
       inset:0;
@@ -68,32 +68,6 @@
         radial-gradient(1200px 600px at 20% 0%, rgba(0,0,0,0.12), rgba(0,0,0,0.32)),
         linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
       z-index:-1;
-    }
-
-    /* Mobile: video arriba, imagen abajo */
-    .mobile-vid{
-      position:fixed;
-      left:0; right:0; top:0;
-      height:46vh;
-      z-index:-2;
-      display:none;
-      pointer-events:none;
-      overflow:hidden;
-      background:#000;
-    }
-    .mobile-vid video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      opacity:0.88;
-      filter:contrast(1.05) saturate(1.05);
-    }
-    .mobile-vid::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,0.22), rgba(0,0,0,0.14), rgba(0,0,0,0.26));
     }
 
     a{color:inherit;text-decoration:none;}
@@ -173,37 +147,45 @@
 
     .hero{display:grid;gap:22px;align-items:stretch;grid-template-columns:1.15fr 0.85fr;}
     .hero-left{
-      position:relative;min-height:440px;border-radius:calc(var(--radius) + 4px);
-      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
-      background:rgba(255,255,255,0.04);
+      position:relative;
+      min-height:520px;
+      border-radius:calc(var(--radius) + 4px);
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      background:#000;
     }
-    .hero-left .hero-bg{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;object-position:center 18%;
-      transform:scale(1.03);
-      background:#000;display:block;
+
+    /* HERO VIDEO */
+    .hero-video{
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      opacity:0.92;
     }
     .hero-left::after{
-      content:"";position:absolute;inset:0;pointer-events:none;
-      background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.10), rgba(0,0,0,0.34));
+      content:"";
+      position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.08), rgba(0,0,0,0.30)),
+        linear-gradient(to bottom, rgba(0,0,0,0.16), rgba(0,0,0,0.34));
     }
 
     .hero-content{
       position:relative;z-index:2;height:100%;
       display:flex;flex-direction:column;justify-content:flex-end;
-      padding:22px;padding-bottom:30px;
+      padding:22px;padding-bottom:32px;
     }
-
     .hero-panel{
       width:min(760px, 100%);
       border-radius:18px;
       padding:18px 18px;
-      background:rgba(0,0,0,0.62);
+      background:rgba(0,0,0,0.60);
       border:1px solid rgba(255,255,255,0.16);
       box-shadow:0 18px 44px rgba(0,0,0,0.45);
       backdrop-filter: blur(6px);
     }
-
     .hero-brand{
       font-size:clamp(44px,6vw,84px);
       line-height:0.95;
@@ -266,45 +248,92 @@
       font-size:12px;text-transform:uppercase;letter-spacing:0.4px;
     }
 
-    /* Galeria compacta: 3 fotos enteras (sin recorte) */
-    .thumb-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-      margin-top:12px;
-    }
-    .thumb{
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(0,0,0,0.55);
-      box-shadow:0 14px 36px rgba(0,0,0,0.35);
-      aspect-ratio:4/3;
-      padding:8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .thumb img{
-      width:100%;
-      height:100%;
-      object-fit:contain; /* clave: ENTERA */
-      display:block;
-    }
-
-    .gallery-actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:12px;
-    }
-
     .map{
       border-radius:calc(var(--radius) + 2px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
       background:rgba(255,255,255,0.04);margin-top:14px;
     }
     .map iframe{width:100%;height:250px;border:0;display:block;}
+
+    /* Carrusel grande (fotos + videos) */
+    .carousel{
+      position:relative;
+      border-radius:calc(var(--radius) + 4px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:0 18px 44px rgba(0,0,0,0.40);
+      background:rgba(0,0,0,0.70);
+      margin-top:12px;
+    }
+    .track{
+      display:flex;
+      transition:transform .55s ease;
+      will-change:transform;
+    }
+    .slide{
+      min-width:100%;
+      height:420px;
+      position:relative;
+      background:#000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .slide video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      background:#000;
+    }
+
+    .car-ui{
+      position:absolute;
+      left:14px;right:14px;bottom:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      pointer-events:none;
+    }
+    .car-btn{
+      pointer-events:auto;
+      width:44px;height:44px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.55);
+      backdrop-filter:blur(8px);
+      display:grid;place-items:center;
+      cursor:pointer;
+      color:#fff;
+      transition:transform .12s ease, background .12s ease;
+    }
+    .car-btn:hover{transform:translateY(-1px);background:rgba(0,0,0,0.72);}
+
+    .dots{
+      pointer-events:auto;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      flex:1;
+    }
+    .dotb{
+      width:9px;height:9px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.20);
+      background:rgba(255,255,255,0.14);
+      cursor:pointer;
+    }
+    .dotb.is-active{
+      background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
+      border-color:rgba(255,255,255,0.22);
+    }
 
     footer{
       padding:26px 0 38px;border-top:1px solid var(--border);
@@ -343,182 +372,43 @@
     .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-    /* Modal galeria */
-    .modal{
-      position:fixed;
-      inset:0;
-      z-index:200;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-    }
-    .modal.is-open{display:flex;}
-    .modal-backdrop{
-      position:absolute;inset:0;
-      background:rgba(0,0,0,0.68);
-      backdrop-filter:blur(8px);
-    }
-    .modal-panel{
-      position:relative;
-      width:min(980px, 100%);
-      max-height:min(88vh, 860px);
-      overflow:hidden;
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(10,10,14,0.90);
-      box-shadow:0 30px 80px rgba(0,0,0,0.60);
-      display:flex;
-      flex-direction:column;
-    }
-    .modal-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 14px;
-      border-bottom:1px solid rgba(255,255,255,0.10);
-      background:rgba(0,0,0,0.34);
-    }
-    .tabs{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-    .tab{
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(255,255,255,0.06);
-      color:rgba(255,255,255,0.86);
-      cursor:pointer;
-      user-select:none;
-      font-size:13px;
-    }
-    .tab.is-active{
-      background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
-      color:#0b0b0d;
-      border-color:rgba(255,255,255,0.22);
-      font-weight:800;
-    }
-    .modal-close{
-      width:40px;height:40px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.16);
-      background:rgba(0,0,0,0.55);
-      color:#fff;
-      cursor:pointer;
-      display:grid;place-items:center;
-    }
-    .modal-close:hover{background:rgba(0,0,0,0.70);}
-    .modal-body{
-      padding:14px;
-      overflow:auto;
-    }
-
-    .modal-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:12px;
-    }
-    .modal-item{
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(0,0,0,0.55);
-      aspect-ratio:4/3;
-      padding:10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .modal-item img{
-      width:100%;height:100%;
-      object-fit:contain; /* fotos enteras en modal tambien */
-      display:block;
-    }
-
-    .modal-videos{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:12px;
-    }
-    .mv{
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.14);
-      background:rgba(0,0,0,0.88);
-      aspect-ratio:16/9;
-      position:relative;
-      box-shadow:0 14px 36px rgba(0,0,0,0.45);
-    }
-    .mv video{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:contain;
-      background:#000;
-    }
-
     @media (max-width: 920px){
-      /* Mobile: video arriba + imagen abajo */
-      .mobile-vid{display:block;}
-      .bg-overlay{
-        top:46vh;
-        height:54vh;
-        bottom:auto;
-        z-index:-3;
-        background-position:center;
-      }
-      .bg-overlay::after{
-        background:
-          linear-gradient(to bottom, rgba(0,0,0,0.22), rgba(0,0,0,0.30)),
-          radial-gradient(900px 420px at 50% 0%, rgba(0,0,0,0.06), rgba(0,0,0,0.26));
-      }
-
       main{padding-top:22px;}
       section{padding:26px 0;}
       .hero{grid-template-columns:1fr;}
-      .hero-left{min-height:560px;}
-      .hero-left .hero-bg{object-position:center 10%;transform:scale(1.08);}
-      .hero-left::after{background:none !important;}
+      .hero-left{min-height:620px;}
+      .hero-left::after{
+        background:linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.26));
+      }
       .hero-panel{
-        background:transparent !important;
-        border:none !important;
-        box-shadow:none !important;
-        backdrop-filter:none !important;
-        padding:0 !important;
+        background:rgba(0,0,0,0.50) !important;
+        border:1px solid rgba(255,255,255,0.16) !important;
+        box-shadow:0 18px 44px rgba(0,0,0,0.40) !important;
+        backdrop-filter: blur(6px) !important;
+        padding:16px !important;
       }
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
       .svc-img{height:210px;}
-      .hero-content{justify-content:center;padding-bottom:20px;}
-
-      .thumb-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
-      .modal-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-      .modal-videos{grid-template-columns:1fr;}
+      .hero-content{justify-content:flex-end;padding-bottom:22px;}
       .map iframe{height:240px;}
+      .slide{height:360px;}
     }
 
     @media (max-width: 520px){
-      .thumb-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
-      .modal-grid{grid-template-columns:1fr;}
-      .thumb{padding:6px;}
+      .slide{height:320px;}
     }
 
     @media (max-width: 420px){
       .brand img{width:40px;height:40px;}
       .btn{padding:10px 12px;}
       .float-ig{right:12px;bottom:12px;}
-      .hero-left{min-height:600px;}
     }
   </style>
 </head>
 
 <body>
   <div class="bg-overlay" aria-hidden="true"></div>
-
-  <div class="mobile-vid" aria-hidden="true">
-    <video autoplay loop muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
-      <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
-    </video>
-  </div>
 
   <header class="header">
     <div class="wrap header-inner">
@@ -540,7 +430,9 @@
     <section>
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
-          <img class="hero-bg" src="https://iili.io/qHOTGgp.png" alt="Open Box hero" />
+          <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
+            <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
+          </video>
 
           <div class="hero-content">
             <div class="hero-panel">
@@ -593,7 +485,7 @@
     <section id="servicios">
       <div class="grid cards-3">
         <div class="card">
-          <img class="svc-img" src="https://iili.io/qJnX3Bt.webp" alt="Funcional Open Box" />
+          <img class="svc-img" src="https://iili.io/qJnX3Bt.webp" alt="Funcional" />
           <div class="card-pad">
             <span class="svc-badge">Servicio</span>
             <h2 class="h2" style="margin-top:10px;">Funcional</h2>
@@ -602,7 +494,7 @@
         </div>
 
         <div class="card">
-          <img class="svc-img" src="https://iili.io/qJnw73X.webp" alt="CrossFit Open Box" />
+          <img class="svc-img" src="https://iili.io/qJnw73X.webp" alt="CrossFit" />
           <div class="card-pad">
             <span class="svc-badge">Servicio</span>
             <h2 class="h2" style="margin-top:10px;">CrossFit</h2>
@@ -611,7 +503,7 @@
         </div>
 
         <div class="card">
-          <img class="svc-img" src="https://iili.io/qJnkDen.webp" alt="Personalizado Open Box" />
+          <img class="svc-img" src="https://iili.io/qJnkDen.webp" alt="Personalizado" />
           <div class="card-pad">
             <span class="svc-badge">Servicio</span>
             <h2 class="h2" style="margin-top:10px;">Personalizado</h2>
@@ -644,17 +536,54 @@
           <div class="card-pad">
             <span class="kicker">Galeria</span>
             <h2 class="h2" style="margin-top:10px;">Fotos y videos</h2>
-            <p class="p">Vista rapida (3 fotos). Para ver todo, abre la galeria completa.</p>
+            <p class="p">Carrusel grande automatico. Fotos y videos en una sola pasada.</p>
 
-            <div class="thumb-grid" aria-label="3 fotos">
-              <div class="thumb"><img src="https://iili.io/qJKxm5N.jpg" alt="Foto 1" /></div>
-              <div class="thumb"><img src="https://iili.io/qJKzHzX.jpg" alt="Foto 2" /></div>
-              <div class="thumb"><img src="https://iili.io/qJKxybt.jpg" alt="Foto 3" /></div>
+            <div class="carousel" id="carousel">
+              <div class="track" id="track">
+                <!-- FOTO HERO ANTERIOR pasa a galeria -->
+                <div class="slide"><img src="https://iili.io/qHOTGgp.png" alt="Foto 0" /></div>
+
+                <!-- FOTOS -->
+                <div class="slide"><img src="https://iili.io/qJKxm5N.jpg" alt="Foto 1" /></div>
+                <div class="slide"><img src="https://iili.io/qJKzHzX.jpg" alt="Foto 2" /></div>
+                <div class="slide"><img src="https://iili.io/qJKxybt.jpg" alt="Foto 3" /></div>
+                <div class="slide"><img src="https://iili.io/qJKxpeI.jpg" alt="Foto 4" /></div>
+                <div class="slide"><img src="https://iili.io/qJKzF1f.jpg" alt="Foto 5" /></div>
+                <div class="slide"><img src="https://iili.io/qJKz3qG.jpg" alt="Foto 6" /></div>
+                <div class="slide"><img src="https://iili.io/qJKzKg4.jpg" alt="Foto 7" /></div>
+
+                <!-- VIDEOS -->
+                <div class="slide">
+                  <video muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="slide">
+                  <video muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+
+              <div class="car-ui">
+                <button class="car-btn" type="button" id="prev" aria-label="Anterior">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <path d="M15 6l-6 6 6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+
+                <div class="dots" id="dots"></div>
+
+                <button class="car-btn" type="button" id="next" aria-label="Siguiente">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+                    <path d="M9 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
             </div>
 
-            <div class="gallery-actions">
-              <button class="btn btn-primary" type="button" id="btnFotos">Ver mas fotos</button>
-              <button class="btn" type="button" id="btnVideos">Ver videos</button>
+            <div style="margin-top:14px;">
+              <a class="btn" href="#inicio">Volver arriba</a>
             </div>
           </div>
         </div>
@@ -687,53 +616,6 @@
     </span>
   </a>
 
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Galeria">
-      <div class="modal-top">
-        <div class="tabs">
-          <div class="tab is-active" id="tabFotos" data-tab="fotos">Fotos</div>
-          <div class="tab" id="tabVideos" data-tab="videos">Videos</div>
-        </div>
-        <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
-            <path d="M6 6l12 12M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div id="panelFotos">
-          <div class="modal-grid">
-            <div class="modal-item"><img src="https://iili.io/qJKxm5N.jpg" alt="Foto 1" /></div>
-            <div class="modal-item"><img src="https://iili.io/qJKzHzX.jpg" alt="Foto 2" /></div>
-            <div class="modal-item"><img src="https://iili.io/qJKxybt.jpg" alt="Foto 3" /></div>
-            <div class="modal-item"><img src="https://iili.io/qJKxpeI.jpg" alt="Foto 4" /></div>
-            <div class="modal-item"><img src="https://iili.io/qJKzF1f.jpg" alt="Foto 5" /></div>
-            <div class="modal-item"><img src="https://iili.io/qJKz3qG.jpg" alt="Foto 6" /></div>
-            <div class="modal-item"><img src="https://iili.io/qJKzKg4.jpg" alt="Foto 7" /></div>
-          </div>
-        </div>
-
-        <div id="panelVideos" style="display:none;">
-          <div class="modal-videos">
-            <div class="mv">
-              <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div class="mv">
-              <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
@@ -753,63 +635,107 @@
     })();
 
     (function(){
-      var modal = document.getElementById("modal");
-      var backdrop = document.getElementById("modalBackdrop");
-      var closeBtn = document.getElementById("modalClose");
+      var carousel = document.getElementById("carousel");
+      var track = document.getElementById("track");
+      var prev = document.getElementById("prev");
+      var next = document.getElementById("next");
+      var dotsWrap = document.getElementById("dots");
+      var slides = Array.prototype.slice.call(track.children);
+      var idx = 0;
+      var timer = null;
+      var delay = 3600;
 
-      var btnFotos = document.getElementById("btnFotos");
-      var btnVideos = document.getElementById("btnVideos");
-
-      var tabFotos = document.getElementById("tabFotos");
-      var tabVideos = document.getElementById("tabVideos");
-      var panelFotos = document.getElementById("panelFotos");
-      var panelVideos = document.getElementById("panelVideos");
-
-      function openModal(which){
-        modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-        setTab(which || "fotos");
+      function setTransform(){
+        track.style.transform = "translateX(" + (-idx * 100) + "%)";
+        updateDots();
+        handleSlideMedia();
       }
 
-      function closeModal(){
-        modal.classList.remove("is-open");
-        modal.setAttribute("aria-hidden", "true");
-        document.body.style.overflow = "";
-        stopVideos();
+      function buildDots(){
+        dotsWrap.innerHTML = "";
+        slides.forEach(function(_, i){
+          var b = document.createElement("button");
+          b.type = "button";
+          b.className = "dotb" + (i === idx ? " is-active" : "");
+          b.addEventListener("click", function(){
+            idx = i;
+            setTransform();
+            restart();
+          });
+          dotsWrap.appendChild(b);
+        });
       }
 
-      function stopVideos(){
-        try{
-          var vids = panelVideos.querySelectorAll("video");
-          vids.forEach(function(v){
+      function updateDots(){
+        var dots = dotsWrap.querySelectorAll(".dotb");
+        dots.forEach(function(d, i){
+          d.classList.toggle("is-active", i === idx);
+        });
+      }
+
+      function nextSlide(){
+        idx = (idx + 1) % slides.length;
+        setTransform();
+      }
+
+      function prevSlide(){
+        idx = (idx - 1 + slides.length) % slides.length;
+        setTransform();
+      }
+
+      function stopAllVideos(){
+        slides.forEach(function(s){
+          var v = s.querySelector("video");
+          if(v){
             v.pause();
             v.currentTime = 0;
-          });
-        }catch(e){}
+          }
+        });
       }
 
-      function setTab(which){
-        var isFotos = which === "fotos";
-        tabFotos.classList.toggle("is-active", isFotos);
-        tabVideos.classList.toggle("is-active", !isFotos);
-        panelFotos.style.display = isFotos ? "" : "none";
-        panelVideos.style.display = isFotos ? "none" : "";
-        if(isFotos) stopVideos();
+      function handleSlideMedia(){
+        stopAllVideos();
+        var current = slides[idx];
+        var v = current.querySelector("video");
+        if(v){
+          v.muted = true;
+          v.play().catch(function(){});
+        }
       }
 
-      btnFotos.addEventListener("click", function(){ openModal("fotos"); });
-      btnVideos.addEventListener("click", function(){ openModal("videos"); });
+      function start(){
+        if(timer) return;
+        timer = setInterval(nextSlide, delay);
+      }
 
-      tabFotos.addEventListener("click", function(){ setTab("fotos"); });
-      tabVideos.addEventListener("click", function(){ setTab("videos"); });
+      function stop(){
+        if(!timer) return;
+        clearInterval(timer);
+        timer = null;
+      }
 
-      closeBtn.addEventListener("click", closeModal);
-      backdrop.addEventListener("click", closeModal);
+      function restart(){
+        stop();
+        start();
+      }
 
-      window.addEventListener("keydown", function(e){
-        if(e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+      prev.addEventListener("click", function(){
+        prevSlide();
+        restart();
       });
+      next.addEventListener("click", function(){
+        nextSlide();
+        restart();
+      });
+
+      carousel.addEventListener("mouseenter", stop);
+      carousel.addEventListener("mouseleave", start);
+      carousel.addEventListener("touchstart", stop, {passive:true});
+      carousel.addEventListener("touchend", start, {passive:true});
+
+      buildDots();
+      setTransform();
+      start();
     })();
   </script>
 </body>
