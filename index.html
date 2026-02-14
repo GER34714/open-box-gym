@@ -7,7 +7,6 @@
   <title>Gimnasio Open Box | 9 de Julio</title>
   <meta name="description" content="Funcional, CrossFit y entrenamiento personalizado en 9 de Julio. Horarios de lunes a viernes. Contacto por Instagram." />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Gimnasio Open Box | 9 de Julio" />
   <meta property="og:description" content="Funcional, CrossFit y entrenamiento personalizado. Consultas por Instagram. Av. Agustin Alvarez 25, 9 de Julio." />
   <meta property="og:type" content="website" />
@@ -18,6 +17,12 @@
   <meta name="theme-color" content="#0b0b0d" />
 
   <style>
+    @font-face{
+      font-family:"CFCrackedStone";
+      src:url("./fonts/CFCrackedStone.ttf") format("truetype");
+      font-display:swap;
+    }
+
     :root{
       --bg:#0b0b0d;
       --txt:rgba(255,255,255,0.92);
@@ -75,6 +80,7 @@
       display:flex;align-items:center;justify-content:space-between;gap:14px;
       padding:12px 0;
     }
+
     .brand{display:flex;align-items:center;gap:12px;min-width:0;}
     .brand img{
       width:44px;height:44px;border-radius:12px;object-fit:cover;
@@ -89,6 +95,14 @@
     .brand .txt span{
       font-size:12px;color:var(--muted);
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+
+    /* Fuente especial SOLO para el nombre "Open Box" */
+    .brand-name{
+      font-family:"CFCrackedStone", ui-sans-serif, system-ui, sans-serif;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      text-shadow:0 14px 36px rgba(0,0,0,0.70);
     }
 
     .btn{
@@ -136,25 +150,19 @@
       background:rgba(255,255,255,0.04);
     }
     .hero-left .hero-bg{
-      position:absolute;inset:0;
-      width:100%;height:100%;
-      display:block;
-      object-fit:cover;
-      object-position:center 20%;
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;object-position:center 20%;
       transform:scale(1.03);
-      background:#000;
+      background:#000;display:block;
     }
     .hero-left::after{
-      content:"";
-      position:absolute;inset:0;
-      pointer-events:none;
+      content:"";position:absolute;inset:0;pointer-events:none;
       background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.10), rgba(0,0,0,0.34));
     }
     .hero-content{
       position:relative;z-index:2;height:100%;
       display:flex;flex-direction:column;justify-content:flex-start;
-      padding:20px;
-      padding-top:22px;
+      padding:20px;padding-top:22px;
     }
     .hero-panel{
       width:min(760px, 100%);
@@ -183,6 +191,7 @@
 
     .side{display:grid;gap:28px;height:100%;}
     .side .card{height:100%;}
+
     .list{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:12px;}
     .li{
       display:flex;gap:10px;align-items:flex-start;
@@ -213,47 +222,91 @@
     .hour strong{font-size:13px;color:#fff;}
     .hour span{font-size:13px;color:rgba(255,255,255,0.90);}
 
-    /* GALERIA */
-    .media-layout{display:grid;grid-template-columns:1fr;gap:18px;margin-top:14px!important;}
+    /* GALERIA PROLIJA */
+    .media{display:grid;gap:14px;margin-top:14px;}
+    .media-head{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.10);
+    }
+    .media-head .left{display:flex;flex-direction:column;gap:6px;}
+    .media-head .left h3{margin:0;font-size:16px;color:#fff;letter-spacing:-0.2px;}
+    .media-head .left p{margin:0;font-size:12px;color:rgba(255,255,255,0.72);}
 
     .vgrid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:16px;
+      margin-top:10px;
     }
     .v-item{
-      position:relative;border-radius:calc(var(--radius) + 2px);
-      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
+      position:relative;
+      border-radius:calc(var(--radius) + 2px);
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
       background:rgba(0,0,0,0.88);
       aspect-ratio:16/9;
     }
+    .v-item::before{
+      content:"";
+      position:absolute;inset:0;
+      background:radial-gradient(900px 420px at 40% 20%, rgba(255,255,255,0.06), rgba(0,0,0,0.35));
+      pointer-events:none;
+      z-index:1;
+    }
     .v-item video{
+      position:relative;z-index:2;
       width:100%;height:100%;
       object-fit:contain;
       display:block;
       background:#000;
     }
+    .v-cap{
+      position:absolute;left:12px;bottom:12px;z-index:3;
+      background:rgba(0,0,0,0.62);
+      border:1px solid rgba(255,255,255,0.16);
+      padding:6px 10px;border-radius:999px;
+      font-size:12px;color:rgba(255,255,255,0.90);
+      backdrop-filter:blur(8px);
+    }
 
-    .carousel{position:relative;border-radius:calc(var(--radius) + 2px);overflow:hidden;}
+    .carousel{
+      position:relative;
+      border-radius:calc(var(--radius) + 2px);
+      overflow:hidden;
+      margin-top:6px;
+    }
     .carousel-track{
-      display:flex;gap:14px;overflow:auto;
-      scroll-snap-type:x mandatory;scroll-behavior:smooth;
-      padding:4px 0 10px;scrollbar-width:thin;
+      display:flex;
+      gap:14px;
+      overflow:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      padding:6px 0 12px;
+      scrollbar-width:thin;
     }
     .carousel-track::-webkit-scrollbar{height:10px;}
     .carousel-track::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.18);border-radius:999px;}
+
     .slide{
       scroll-snap-align:start;
-      flex:0 0 72%;
-      max-width:72%;
+      flex:0 0 66%;
+      max-width:66%;
       border-radius:18px;
       overflow:hidden;
       border:1px solid var(--border);
       box-shadow:var(--shadow);
       background:rgba(255,255,255,0.04);
-      min-height:300px;
+      min-height:320px;
+      position:relative;
     }
-    .slide img{width:100%;height:100%;object-fit:cover;display:block;}
+    .slide img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.01);
+    }
+
     .car-btn{
       position:absolute;top:50%;transform:translateY(-50%);
       z-index:5;width:44px;height:44px;border-radius:999px;
@@ -268,8 +321,31 @@
     .car-btn.prev{left:10px;}
     .car-btn.next{right:10px;}
     .car-btn svg{width:18px;height:18px;}
-    .car-hint{margin-top:10px;color:rgba(255,255,255,0.72);font-size:12px;}
 
+    .car-bottom{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .dots{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+    .dot2{
+      width:8px;height:8px;border-radius:999px;
+      background:rgba(255,255,255,0.22);
+      border:1px solid rgba(255,255,255,0.18);
+    }
+    .dot2.is-active{
+      background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
+      border-color:rgba(255,255,255,0.22);
+    }
+    .counter{
+      font-size:12px;
+      color:rgba(255,255,255,0.74);
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(0,0,0,0.42);
+      padding:6px 10px;border-radius:999px;
+    }
+    .car-hint{font-size:12px;color:rgba(255,255,255,0.72);}
+
+    /* MAP */
     .map{
       border-radius:calc(var(--radius) + 2px);
       overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
@@ -295,6 +371,7 @@
       border-bottom:1px dashed rgba(255,255,255,0.30);
     }
 
+    /* FLOAT IG */
     .float-ig{
       position: fixed;right:16px;bottom:16px;z-index:60;
       display:inline-flex;align-items:center;gap:10px;
@@ -363,7 +440,7 @@
       <a class="brand" href="#inicio" aria-label="Ir al inicio">
         <img src="https://iili.io/qHNHTOP.png" alt="Open Box logo" />
         <div class="txt">
-          <strong>Gimnasio Open Box</strong>
+          <strong><span class="brand-name">Open Box</span> Gimnasio</strong>
           <span>9 de Julio, Buenos Aires</span>
         </div>
       </a>
@@ -378,7 +455,6 @@
     <section>
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
-          <!-- HERO: imagen fija -->
           <img class="hero-bg" src="https://iili.io/qHOTGgp.png" alt="Open Box hero" />
 
           <div class="hero-content">
@@ -403,27 +479,9 @@
               <p class="p">Una estructura simple para que arranques, mejores y no abandones.</p>
 
               <ul class="list">
-                <li class="li">
-                  <span class="dot"></span>
-                  <div>
-                    <strong>Clases guiadas</strong>
-                    <span>Progresiones y tecnica, sin improvisar.</span>
-                  </div>
-                </li>
-                <li class="li">
-                  <span class="dot"></span>
-                  <div>
-                    <strong>Plan segun tu objetivo</strong>
-                    <span>Volver a moverte, bajar, ganar fuerza o rendimiento.</span>
-                  </div>
-                </li>
-                <li class="li">
-                  <span class="dot"></span>
-                  <div>
-                    <strong>Ambiente de box</strong>
-                    <span>Constancia, energia y equipo. Se entrena de verdad.</span>
-                  </div>
-                </li>
+                <li class="li"><span class="dot"></span><div><strong>Clases guiadas</strong><span>Progresiones y tecnica, sin improvisar.</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>Plan segun tu objetivo</strong><span>Volver a moverte, bajar, ganar fuerza o rendimiento.</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>Ambiente de box</strong><span>Constancia, energia y equipo. Se entrena de verdad.</span></div></li>
               </ul>
             </div>
           </div>
@@ -473,20 +531,28 @@
         <div class="card">
           <div class="card-pad">
             <span class="kicker">Galeria</span>
-            <h2 class="h2" style="margin-top:10px;">Videos + fotos</h2>
-            <p class="p">Videos sin sonido por defecto (muted) y completos (sin recorte). Fotos en carrusel grande.</p>
 
-            <div class="media-layout">
+            <div class="media">
+              <div class="media-head">
+                <div class="left">
+                  <h3>Videos + fotos</h3>
+                  <p>Videos sin sonido por defecto (muted) y completos (sin recorte). Fotos grandes en carrusel.</p>
+                </div>
+                <div class="counter" id="photoCounter">1/7</div>
+              </div>
+
               <div class="vgrid">
                 <div class="v-item">
                   <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
                     <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
                   </video>
+                  <div class="v-cap">Video 1</div>
                 </div>
                 <div class="v-item">
                   <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
                     <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
                   </video>
+                  <div class="v-cap">Video 2</div>
                 </div>
               </div>
 
@@ -508,10 +574,13 @@
                   <div class="slide"><img src="https://iili.io/qJKzKg4.jpg" alt="Open Box foto 7" /></div>
                 </div>
 
-                <div class="car-hint">Desliza para ver mas fotos o usa las flechas.</div>
+                <div class="car-bottom">
+                  <div class="dots" id="dots"></div>
+                  <div class="car-hint">Desliza o usa las flechas.</div>
+                </div>
               </div>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>
@@ -591,12 +660,58 @@
 
     (function(){
       var track = document.getElementById("photoTrack");
-      if(!track) return;
+      var dotsWrap = document.getElementById("dots");
+      var counter = document.getElementById("photoCounter");
+      if(!track || !dotsWrap || !counter) return;
+
+      var slides = Array.prototype.slice.call(track.querySelectorAll(".slide"));
+      var total = slides.length;
+
+      function makeDots(){
+        dotsWrap.innerHTML = "";
+        for(var i=0;i<total;i++){
+          var d = document.createElement("span");
+          d.className = "dot2" + (i===0 ? " is-active" : "");
+          d.setAttribute("data-i", String(i));
+          d.style.cursor = "pointer";
+          d.addEventListener("click", function(){
+            var idx = parseInt(this.getAttribute("data-i") || "0", 10);
+            goTo(idx);
+          });
+          dotsWrap.appendChild(d);
+        }
+      }
+
+      function activeDot(idx){
+        var ds = dotsWrap.querySelectorAll(".dot2");
+        for(var i=0;i<ds.length;i++){
+          ds[i].classList.toggle("is-active", i===idx);
+        }
+        counter.textContent = String(idx+1) + "/" + String(total);
+      }
+
+      function currentIndex(){
+        var left = track.scrollLeft;
+        var best = 0;
+        var bestDist = Infinity;
+        for(var i=0;i<slides.length;i++){
+          var sLeft = slides[i].offsetLeft;
+          var dist = Math.abs(sLeft - left);
+          if(dist < bestDist){ bestDist = dist; best = i; }
+        }
+        return best;
+      }
+
+      function goTo(idx){
+        if(!slides[idx]) return;
+        track.scrollTo({ left: slides[idx].offsetLeft, behavior: "smooth" });
+        activeDot(idx);
+      }
 
       function slideBy(dir){
-        var slide = track.querySelector(".slide");
-        var w = slide ? slide.getBoundingClientRect().width : 320;
-        track.scrollBy({ left: dir * (w + 14), behavior: "smooth" });
+        var i = currentIndex();
+        var next = Math.max(0, Math.min(total-1, i + dir));
+        goTo(next);
       }
 
       document.querySelectorAll(".car-btn").forEach(function(btn){
@@ -605,6 +720,19 @@
           slideBy(dir);
         });
       });
+
+      var ticking = false;
+      track.addEventListener("scroll", function(){
+        if(ticking) return;
+        ticking = true;
+        requestAnimationFrame(function(){
+          activeDot(currentIndex());
+          ticking = false;
+        });
+      });
+
+      makeDots();
+      activeDot(0);
     })();
   </script>
 </body>
