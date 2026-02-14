@@ -80,6 +80,34 @@
       text-shadow:0 18px 60px rgba(0,0,0,0.92);
     }
 
+    @keyframes neonPulse{
+      0%{
+        text-shadow:
+          0 0 10px rgba(124,92,255,0.55),
+          0 0 22px rgba(32,227,178,0.35),
+          0 18px 60px rgba(0,0,0,0.92);
+        filter:saturate(1.05);
+      }
+      50%{
+        text-shadow:
+          0 0 14px rgba(124,92,255,0.95),
+          0 0 34px rgba(32,227,178,0.70),
+          0 0 60px rgba(124,92,255,0.35),
+          0 18px 60px rgba(0,0,0,0.92);
+        filter:saturate(1.18);
+      }
+      100%{
+        text-shadow:
+          0 0 10px rgba(124,92,255,0.55),
+          0 0 22px rgba(32,227,178,0.35),
+          0 18px 60px rgba(0,0,0,0.92);
+        filter:saturate(1.05);
+      }
+    }
+    .neon-pulse{
+      animation:neonPulse 2.2s ease-in-out infinite;
+    }
+
     .header{
       position:sticky;top:0;z-index:50;
       backdrop-filter:blur(10px);
@@ -155,19 +183,21 @@
       background:#000;
     }
 
+    /* VIDEO HERO: mostrar TODO el video (sin recorte) dentro de la tarjeta */
     .hero-video{
       position:absolute;inset:0;
       width:100%;height:100%;
-      object-fit:cover;
+      object-fit:contain; /* clave */
       display:block;
-      opacity:0.92;
+      background:#000;
+      opacity:0.96;
     }
     .hero-left::after{
       content:"";
       position:absolute;inset:0;pointer-events:none;
       background:
-        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.08), rgba(0,0,0,0.30)),
-        linear-gradient(to bottom, rgba(0,0,0,0.16), rgba(0,0,0,0.34));
+        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.08), rgba(0,0,0,0.26)),
+        linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.20));
     }
 
     .hero-content{
@@ -176,22 +206,21 @@
       padding:22px;padding-bottom:32px;
     }
 
-    /* CAMBIO: el "overlay" del hero ahora se ajusta AL TAMAÑO del panel (card del hero) */
     .hero-panel{
       width:min(760px, 100%);
       border-radius:18px;
       padding:18px 18px;
-      background:transparent; /* se vuelve transparente */
+      background:transparent;
       border:0;
       box-shadow:none;
       backdrop-filter:none;
       position:relative;
-      overflow:hidden; /* para que el overlay no se salga */
+      overflow:hidden;
     }
     .hero-panel::before{
       content:"";
       position:absolute;
-      inset:0; /* exacto al tamaño del panel */
+      inset:0;
       background:rgba(0,0,0,0.60);
       border:1px solid rgba(255,255,255,0.16);
       border-radius:18px;
@@ -270,7 +299,7 @@
     }
     .map iframe{width:100%;height:250px;border:0;display:block;}
 
-    /* Carrusel grande (fotos + videos) */
+    /* Galeria (solo fotos) siempre completa en tarjeta */
     .carousel{
       position:relative;
       border-radius:calc(var(--radius) + 4px);
@@ -293,15 +322,12 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:14px; /* CAMBIO: padding para que se note "dentro de la tarjeta" */
+      padding:14px;
     }
-
-    /* CAMBIO: todo el contenido del carrusel se ve COMPLETO (contain) y se adapta a la tarjeta */
-    .slide img,
-    .slide video{
+    .slide img{
       width:100%;
       height:100%;
-      object-fit:contain; /* clave: imagen/video completo */
+      object-fit:contain; /* clave */
       display:block;
       background:#000;
       border-radius:14px;
@@ -443,7 +469,7 @@
             <div class="hero-panel">
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
 
-              <div class="hero-brand ob-font">OPEN BOX</div>
+              <div class="hero-brand ob-font neon-pulse">OPEN BOX</div>
 
               <div class="hero-title">Entrenamientos guiados</div>
 
@@ -540,13 +566,12 @@
         <div class="card">
           <div class="card-pad">
             <span class="kicker">Galeria</span>
-            <h2 class="h2" style="margin-top:10px;">Fotos y videos</h2>
-            <p class="p">Carrusel grande automatico. Todo se ve completo dentro de la tarjeta.</p>
+            <h2 class="h2" style="margin-top:10px;">Fotos</h2>
+            <p class="p">Slider automatico en moviles. Siempre se ve la imagen completa dentro de la tarjeta.</p>
 
             <div class="carousel" id="carousel">
               <div class="track" id="track">
                 <div class="slide"><img src="https://iili.io/qHOTGgp.png" alt="Foto 0" /></div>
-
                 <div class="slide"><img src="https://iili.io/qJKxm5N.jpg" alt="Foto 1" /></div>
                 <div class="slide"><img src="https://iili.io/qJKzHzX.jpg" alt="Foto 2" /></div>
                 <div class="slide"><img src="https://iili.io/qJKxybt.jpg" alt="Foto 3" /></div>
@@ -554,17 +579,6 @@
                 <div class="slide"><img src="https://iili.io/qJKzF1f.jpg" alt="Foto 5" /></div>
                 <div class="slide"><img src="https://iili.io/qJKz3qG.jpg" alt="Foto 6" /></div>
                 <div class="slide"><img src="https://iili.io/qJKzKg4.jpg" alt="Foto 7" /></div>
-
-                <div class="slide">
-                  <video muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div class="slide">
-                  <video muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
-                  </video>
-                </div>
               </div>
 
               <div class="car-ui">
@@ -645,12 +659,18 @@
       var slides = Array.prototype.slice.call(track.children);
       var idx = 0;
       var timer = null;
-      var delay = 3600;
+
+      function isMobile(){
+        return window.matchMedia && window.matchMedia("(max-width: 920px)").matches;
+      }
+
+      function setDelay(){
+        return isMobile() ? 2600 : 99999999; /* autoplay solo en mobile */
+      }
 
       function setTransform(){
         track.style.transform = "translateX(" + (-idx * 100) + "%)";
         updateDots();
-        handleSlideMedia();
       }
 
       function buildDots(){
@@ -685,27 +705,9 @@
         setTransform();
       }
 
-      function stopAllVideos(){
-        slides.forEach(function(s){
-          var v = s.querySelector("video");
-          if(v){
-            v.pause();
-            v.currentTime = 0;
-          }
-        });
-      }
-
-      function handleSlideMedia(){
-        stopAllVideos();
-        var current = slides[idx];
-        var v = current.querySelector("video");
-        if(v){
-          v.muted = true;
-          v.play().catch(function(){});
-        }
-      }
-
       function start(){
+        var delay = setDelay();
+        if(delay > 60000000) return; /* no autoplay desktop */
         if(timer) return;
         timer = setInterval(nextSlide, delay);
       }
@@ -721,19 +723,15 @@
         start();
       }
 
-      prev.addEventListener("click", function(){
-        prevSlide();
-        restart();
-      });
-      next.addEventListener("click", function(){
-        nextSlide();
-        restart();
-      });
+      prev.addEventListener("click", function(){ prevSlide(); restart(); });
+      next.addEventListener("click", function(){ nextSlide(); restart(); });
 
       carousel.addEventListener("mouseenter", stop);
       carousel.addEventListener("mouseleave", start);
       carousel.addEventListener("touchstart", stop, {passive:true});
       carousel.addEventListener("touchend", start, {passive:true});
+
+      window.addEventListener("resize", function(){ restart(); });
 
       buildDots();
       setTransform();
