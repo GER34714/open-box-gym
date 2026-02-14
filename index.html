@@ -1,6 +1,647 @@
 <!DOCTYPE html>
 <html lang="es-AR">
+<head><!DOCTYPE html>
+<html lang="es-AR">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gimnasio Open Box | 9 de Julio</title>
+  <meta name="description" content="Funcional, CrossFit y entrenamiento personalizado en 9 de Julio. Horarios de lunes a viernes. Contacto por Instagram." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gimnasio Open Box | 9 de Julio" />
+  <meta property="og:description" content="Funcional, CrossFit y entrenamiento personalizado. Consultas por Instagram. Av. Agustin Alvarez 25, 9 de Julio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://iili.io/qHNHTOP.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" type="image/png" href="https://iili.io/qHNHTOP.png" />
+  <meta name="theme-color" content="#0b0b0d" />
+
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --txt:rgba(255,255,255,0.92);
+      --muted:rgba(255,255,255,0.70);
+      --border:rgba(255,255,255,0.14);
+      --accent:#7c5cff;
+      --accent2:#20e3b2;
+      --shadow:0 16px 40px rgba(0,0,0,0.45);
+      --radius:18px;
+      --maxw:1120px;
+      --card:rgba(10,10,14,0.82);
+    }
+
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans","Helvetica Neue",sans-serif;
+      color:var(--txt);
+      background:var(--bg);
+      overflow-x:hidden;
+      padding-bottom:40px;
+    }
+
+    .bg-overlay{
+      position:fixed;
+      inset:0;
+      background-image:url("https://iili.io/qHelxP1.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      z-index:-2;
+      transform:translateZ(0);
+    }
+    .bg-overlay::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(0,0,0,0.12), rgba(0,0,0,0.32)),
+        linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
+      z-index:-1;
+    }
+
+    a{color:inherit;text-decoration:none;}
+    .wrap{width:min(var(--maxw),calc(100% - 32px));margin:0 auto;}
+
+    .header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(0,0,0,0.42);
+      border-bottom:1px solid var(--border);
+    }
+    .header-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:12px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;}
+    .brand img{
+      width:44px;height:44px;border-radius:12px;object-fit:cover;
+      border:1px solid var(--border);box-shadow:var(--shadow);
+      background:rgba(255,255,255,0.06);flex:0 0 auto;
+    }
+    .brand .txt{display:flex;flex-direction:column;line-height:1.05;min-width:0;}
+    .brand .txt strong{
+      font-size:14px;letter-spacing:0.6px;text-transform:uppercase;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .brand .txt span{
+      font-size:12px;color:var(--muted);
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:10px 14px;border-radius:999px;border:1px solid var(--border);
+      background:rgba(255,255,255,0.06);color:var(--txt);
+      box-shadow:0 10px 26px rgba(0,0,0,0.35);
+      transition:transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;cursor:pointer;white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);}
+    .btn-primary{
+      background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
+      border-color:rgba(255,255,255,0.20);
+      color:#0b0b0d;font-weight:800;
+    }
+    .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
+
+    main{padding:26px 0 0;}
+    section{padding:30px 0;}
+    .grid{display:grid;gap:28px;}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .card-pad{padding:18px;}
+
+    .kicker{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);
+      background:rgba(0,0,0,0.42);
+      color:#ffffff;
+      font-size:12px;letter-spacing:0.4px;text-transform:uppercase;
+    }
+
+    /* HERO */
+    .hero{display:grid;gap:22px;align-items:stretch;grid-template-columns:1.15fr 0.85fr;}
+    .hero-left{
+      position:relative;min-height:380px;border-radius:calc(var(--radius) + 4px);
+      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
+      background:rgba(255,255,255,0.04);
+    }
+
+    /* HERO LOGO SLIDESHOW */
+    .hero-left .hero-logo{
+      position:absolute;inset:0;
+      width:100%;height:100%;
+      display:block;
+      object-fit:cover;
+      object-position:center 20%;
+      transform:scale(1.03);
+      background:#000;
+      transition:opacity .35s ease;
+      opacity:1;
+    }
+    .hero-left .hero-logo.is-fading{opacity:0.1;}
+
+    .hero-left::after{
+      content:"";
+      position:absolute;inset:0;
+      pointer-events:none;
+      background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.10), rgba(0,0,0,0.34));
+    }
+
+    /* TODO ARRIBA */
+    .hero-content{
+      position:relative;z-index:2;height:100%;
+      display:flex;flex-direction:column;justify-content:flex-start;
+      padding:20px;
+      padding-top:22px;
+    }
+
+    .hero-panel{
+      width:min(760px, 100%);
+      border-radius:18px;
+      padding:16px 16px;
+      background:rgba(0,0,0,0.62);
+      border:1px solid rgba(255,255,255,0.16);
+      box-shadow:0 18px 44px rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-title{
+      font-size:clamp(22px,3.2vw,40px);
+      margin:10px 0 0;
+      letter-spacing:-0.6px;
+      color:#ffffff;
+      text-shadow:0 14px 36px rgba(0,0,0,0.86);
+    }
+    .hero-sub{
+      margin:10px 0 0;
+      color:#ffffff;
+      font-size:14px;line-height:1.55;
+      max-width:58ch;
+      text-shadow:0 14px 36px rgba(0,0,0,0.86);
+    }
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;}
+
+    .side{display:grid;gap:28px;height:100%;}
+    .side .card{height:100%;}
+
+    .list{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:12px;}
+    .li{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:12px 12px;border-radius:14px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;margin-top:5px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      flex:0 0 auto;
+    }
+    .li strong{display:block;font-size:13px;letter-spacing:0.2px;margin-bottom:2px;color:#fff;}
+    .li span{display:block;font-size:12px;color:var(--muted);line-height:1.35;}
+
+    .cards-3{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+    .cards-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;}
+
+    .h2{margin:0 0 12px;font-size:18px;letter-spacing:-0.2px;color:#fff;}
+    .p{margin:0;color:rgba(255,255,255,0.78);font-size:13px;line-height:1.6;}
+
+    .hours{display:grid;gap:12px;margin-top:12px;}
+    .hour{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      padding:13px 12px;border-radius:14px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .hour strong{font-size:13px;color:#fff;}
+    .hour span{font-size:13px;color:rgba(255,255,255,0.90);}
+
+    /* GALERIA: VIDEOS COMPLETOS + FOTOS GRANDES */
+    .media-layout{
+      display:grid;
+      grid-template-columns:1.25fr 0.75fr;
+      gap:16px;
+      margin-top:14px!important;
+    }
+
+    /* videos mas grandes */
+    .vgrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+    .v-item{
+      position:relative;
+      border-radius:calc(var(--radius) + 2px);
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      background:rgba(0,0,0,0.85);
+      aspect-ratio:16/9;
+    }
+    /* mostrar completo (sin recorte) */
+    .v-item video{
+      width:100%;height:100%;
+      object-fit:contain;
+      display:block;
+      background:#000;
+    }
+    .v-item.is-wide{grid-column:1 / -1; aspect-ratio:21/9;}
+
+    /* fotos medianamente grandes (no miniaturas) */
+    .photo-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:14px;
+      align-content:start;
+    }
+    .p-item{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      background:rgba(255,255,255,0.04);
+      min-height:220px;
+    }
+    .p-item img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+      transform:scale(1.01);
+    }
+
+    /* MAP */
+    .map{
+      border-radius:calc(var(--radius) + 2px);
+      overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow);
+      background:rgba(255,255,255,0.04);margin-top:14px;
+    }
+    .map iframe{width:100%;height:250px;border:0;display:block;}
+    .addr{
+      margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+      color:rgba(255,255,255,0.90);font-size:13px;
+    }
+    .addr small{color:rgba(255,255,255,0.72);}
+
+    footer{
+      padding:26px 0 38px;
+      border-top:1px solid var(--border);
+      background:rgba(0,0,0,0.30);
+      margin-top:18px;
+    }
+    .footer-inner{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      color:var(--muted);font-size:12px;
+    }
+    .footer-inner a{
+      color:rgba(255,255,255,0.90);
+      border-bottom:1px dashed rgba(255,255,255,0.30);
+    }
+
+    /* FLOAT IG */
+    .float-ig{
+      position: fixed;right:16px;bottom:16px;z-index:60;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.62);
+      backdrop-filter:blur(10px);
+      box-shadow:0 18px 44px rgba(0,0,0,0.45);
+      color:rgba(255,255,255,0.92);
+      max-width:calc(100vw - 32px);
+      transition:opacity .15s ease, transform .15s ease;
+    }
+    .float-ig.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
+    .ig-badge{
+      width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(245,133,41,0.95), rgba(221,42,123,0.9), rgba(129,52,175,0.9), rgba(81,91,212,0.9));
+      border:1px solid rgba(255,255,255,0.18);
+      flex:0 0 auto;
+    }
+    .ig-badge svg{width:18px;height:18px;}
+    .float-ig .t{display:flex;flex-direction:column;line-height:1.05;min-width:0;}
+    .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+    @media (max-width: 920px){
+      main{padding-top:22px;}
+      section{padding:26px 0;}
+      .hero{grid-template-columns:1fr;}
+
+      .hero-left{min-height:560px;}
+      .hero-left .hero-logo{
+        object-position:center 10%;
+        transform:scale(1.08);
+      }
+      .hero-left::after{background:none !important;}
+
+      /* en mobile: panel transparente */
+      .hero-panel{
+        background:transparent !important;
+        border:none !important;
+        box-shadow:none !important;
+        backdrop-filter:none !important;
+        padding:0 !important;
+      }
+      .hero-title{ text-shadow:0 18px 50px rgba(0,0,0,0.92); }
+      .hero-sub{ text-shadow:0 18px 50px rgba(0,0,0,0.92); }
+
+      .cards-3{grid-template-columns:1fr;}
+      .cards-2{grid-template-columns:1fr;}
+
+      .media-layout{grid-template-columns:1fr;}
+      .vgrid{grid-template-columns:1fr;}
+      .p-item{min-height:220px;}
+      .map iframe{height:240px;}
+    }
+
+    @media (max-width: 420px){
+      .brand img{width:40px;height:40px;}
+      .btn{padding:10px 12px;}
+      .float-ig{right:12px;bottom:12px;}
+      .hero-left{min-height:600px;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-overlay" aria-hidden="true"></div>
+
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <img src="https://iili.io/qHNHTOP.png" alt="Open Box logo" />
+        <div class="txt">
+          <strong>Gimnasio Open Box</strong>
+          <span>9 de Julio, Buenos Aires</span>
+        </div>
+      </a>
+
+      <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">
+        Ver Instagram
+      </a>
+    </div>
+  </header>
+
+  <main class="wrap" id="inicio">
+    <section>
+      <div class="hero">
+        <div class="hero-left" aria-label="Hero">
+          <!-- LOGO HERO ALTERNANDO -->
+          <img
+            id="heroLogo"
+            class="hero-logo"
+            src="https://iili.io/qHOTGgp.png"
+            alt="Open Box hero logo"
+          />
+
+          <div class="hero-content">
+            <div class="hero-panel">
+              <span class="kicker">Funcional · CrossFit · Personalizado</span>
+              <h1 class="hero-title">Entrena con seguimiento real</h1>
+              <p class="hero-sub">
+                Clases guiadas de lunes a viernes. Te ubicamos segun tu nivel y objetivo para que sostengas el plan.
+              </p>
+              <div class="hero-cta">
+                <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
+                <a class="btn" href="#horarios">Ver horarios</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="card">
+            <div class="card-pad">
+              <h2 class="h2">Por que Open Box</h2>
+              <p class="p">Una estructura simple para que arranques, mejores y no abandones.</p>
+
+              <ul class="list">
+                <li class="li">
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Clases guiadas</strong>
+                    <span>Progresiones y tecnica, sin improvisar.</span>
+                  </div>
+                </li>
+                <li class="li">
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Plan segun tu objetivo</strong>
+                    <span>Volver a moverte, bajar, ganar fuerza o rendimiento.</span>
+                  </div>
+                </li>
+                <li class="li">
+                  <span class="dot"></span>
+                  <div>
+                    <strong>Ambiente de box</strong>
+                    <span>Constancia, energia y equipo. Se entrena de verdad.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-pad">
+              <h2 class="h2">Metodologia</h2>
+              <div class="hours">
+                <div class="hour"><strong>1) Te evaluamos</strong><span>nivel y objetivo</span></div>
+                <div class="hour"><strong>2) Te ubicamos</strong><span>turno y rutina</span></div>
+                <div class="hour"><strong>3) Progresiones</strong><span>paso a paso</span></div>
+                <div class="hour"><strong>4) Seguimiento</strong><span>para sostener</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="grid cards-3">
+        <div class="card">
+          <div class="card-pad">
+            <h2 class="h2">Funcional</h2>
+            <p class="p">Entrenamiento completo para fuerza, movilidad y resistencia.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pad">
+            <h2 class="h2">CrossFit</h2>
+            <p class="p">WODs con tecnica y progresiones para cada nivel.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-pad">
+            <h2 class="h2">Personalizado</h2>
+            <p class="p">Si buscas un plan mas a medida, lo armamos segun tu objetivo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="horarios">
+      <div class="grid cards-2">
+        <div class="card">
+          <div class="card-pad">
+            <span class="kicker">Horarios</span>
+            <h2 class="h2" style="margin-top:10px;">Lunes a viernes</h2>
+            <div class="hours">
+              <div class="hour"><strong>Funcional</strong><span>08:00 y 19:15</span></div>
+              <div class="hour"><strong>Full Body / Tabata</strong><span>09:15</span></div>
+              <div class="hour"><strong>Crosstraining</strong><span>13:30</span></div>
+              <div class="hour"><strong>CrossFit</strong><span>18:00 y 20:30</span></div>
+            </div>
+            <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Quiero empezar</a>
+              <a class="btn" href="#ubicacion">Ver ubicacion</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-pad">
+            <span class="kicker">Galeria</span>
+            <h2 class="h2" style="margin-top:10px;">El box en accion</h2>
+            <p class="p">Videos sin sonido por defecto (muted). Se ven completos (sin recorte).</p>
+
+            <div class="media-layout">
+              <!-- VIDEOS GRANDES (incluye el que era HERO) -->
+              <div class="vgrid">
+                <div class="v-item is-wide">
+                  <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
+                  </video>
+                </div>
+
+                <div class="v-item">
+                  <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
+                  </video>
+                </div>
+              </div>
+
+              <!-- FOTOS GRANDES -->
+              <div class="photo-grid">
+                <div class="p-item"><img src="https://iili.io/qHOTGgp.png" alt="Foto Open Box 1" /></div>
+                <div class="p-item"><img src="https://iili.io/qHOT1qv.png" alt="Foto Open Box 2" /></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ubicacion">
+      <div class="card">
+        <div class="card-pad">
+          <span class="kicker">Ubicacion</span>
+          <h2 class="h2" style="margin-top:10px;">Av. Agustin Alvarez 25, 9 de Julio</h2>
+
+          <div class="map" aria-label="Mapa">
+            <iframe
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
+              title="Mapa Open Box">
+            </iframe>
+          </div>
+
+          <div class="addr">
+            <strong>Direccion:</strong>
+            <span>Av. Agustin Alvarez 25, 9 de Julio, Buenos Aires</span>
+            <small>Consultas por Instagram</small>
+          </div>
+
+          <div style="margin-top:16px;">
+            <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Hablar por Instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="wrap footer-inner">
+      <div>© <span id="y"></span> Gimnasio Open Box</div>
+      <div>
+        <a href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Instagram</a>
+        &nbsp;·&nbsp;
+        <a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="float-ig" id="floatIg" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Abrir Instagram">
+    <span class="ig-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="white" stroke-width="1.6"/>
+        <path d="M12 16.2A4.2 4.2 0 1 0 12 7.8a4.2 4.2 0 0 0 0 8.4Z" stroke="white" stroke-width="1.6"/>
+        <path d="M17.3 6.7h.01" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </span>
+    <span class="t">
+      <strong>@gimnasio.openbox</strong>
+      <span>Consultar horarios</span>
+    </span>
+  </a>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    (function(){
+      var footer = document.getElementById("footer");
+      var floatIg = document.getElementById("floatIg");
+      if(!footer || !floatIg) return;
+
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting) floatIg.classList.add("is-hidden");
+          else floatIg.classList.remove("is-hidden");
+        });
+      }, { root: null, threshold: 0.01 });
+
+      io.observe(footer);
+    })();
+
+    // HERO: alternar 2 imagenes
+    (function(){
+      var el = document.getElementById("heroLogo");
+      if(!el) return;
+
+      var imgs = [
+        "https://iili.io/qHOTGgp.png",
+        "https://iili.io/qHOT1qv.png"
+      ];
+      var i = 0;
+
+      function swap(){
+        el.classList.add("is-fading");
+        setTimeout(function(){
+          i = (i + 1) % imgs.length;
+          el.src = imgs[i];
+          el.classList.remove("is-fading");
+        }, 220);
+      }
+
+      setInterval(swap, 2600);
+    })();
+  </script>
+</body>
+</html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
