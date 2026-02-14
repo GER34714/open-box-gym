@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>OPEN BOX | 9 de Julio</title>
-  <meta name="description" content="Funcional, CrossFit y entrenamiento personalizado en 9 de Julio. Horarios de lunes a viernes. Contacto por Instagram." />
+  <title>OPEN BOX</title>
+  <meta name="description" content="Entrenamientos: Funcional, CrossFit y Personalizado. Consultas por Instagram." />
 
-  <meta property="og:title" content="OPEN BOX | 9 de Julio" />
-  <meta property="og:description" content="Funcional, CrossFit y entrenamiento personalizado. Consultas por Instagram. Av. Agustin Alvarez 25, 9 de Julio." />
+  <meta property="og:title" content="OPEN BOX" />
+  <meta property="og:description" content="Funcional, CrossFit y Personalizado. Consultas por Instagram." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://iili.io/qHNHTOP.png" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -17,7 +17,6 @@
   <meta name="theme-color" content="#0b0b0d" />
 
   <style>
-    /* FUENTE: ya esta en el repo (CFCrackedStone.ttf). Dejo 2 rutas por si la subiste en raiz o /fonts */
     @font-face{
       font-family:"CFCrackedStone";
       src:
@@ -47,9 +46,10 @@
       color:var(--txt);
       background:var(--bg);
       overflow-x:hidden;
-      padding-bottom:40px;
+      padding-bottom:46px;
     }
 
+    /* Fondo imagen (debajo de todo) */
     .bg-overlay{
       position:fixed;
       inset:0;
@@ -57,7 +57,7 @@
       background-size:cover;
       background-position:center;
       background-repeat:no-repeat;
-      z-index:-2;
+      z-index:-3;
       transform:translateZ(0);
     }
     .bg-overlay::after{
@@ -68,6 +68,32 @@
         radial-gradient(1200px 600px at 20% 0%, rgba(0,0,0,0.12), rgba(0,0,0,0.32)),
         linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
       z-index:-1;
+    }
+
+    /* Video overlay SOLO MOBILE, de mitad para abajo */
+    .mobile-vid{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      height:56vh;
+      z-index:-2;
+      display:none;
+      pointer-events:none;
+      overflow:hidden;
+    }
+    .mobile-vid video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:contrast(1.05) saturate(1.05);
+      opacity:0.82;
+    }
+    .mobile-vid::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.44), rgba(0,0,0,0.18), rgba(0,0,0,0.10)),
+        radial-gradient(900px 420px at 50% 0%, rgba(0,0,0,0.05), rgba(0,0,0,0.30));
     }
 
     a{color:inherit;text-decoration:none;}
@@ -106,10 +132,6 @@
     .brand .txt span{
       font-size:12px;color:var(--muted);
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-    }
-    .brand .txt span .ob-font{
-      letter-spacing:1px;
-      text-shadow:0 14px 36px rgba(0,0,0,0.70);
     }
 
     .btn{
@@ -166,7 +188,6 @@
       background:radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.10), rgba(0,0,0,0.34));
     }
 
-    /* PC: texto mas abajo */
     .hero-content{
       position:relative;z-index:2;height:100%;
       display:flex;flex-direction:column;justify-content:flex-end;
@@ -195,7 +216,6 @@
       color:#ffffff;
       text-shadow:0 14px 36px rgba(0,0,0,0.86);
     }
-    .hero-title .ob-font{letter-spacing:1.5px;}
     .hero-sub{
       margin:10px 0 0;
       color:#ffffff;
@@ -246,71 +266,14 @@
       font-size:12px;text-transform:uppercase;letter-spacing:0.4px;
     }
 
-    .hours{display:grid;gap:12px;margin-top:12px;}
-    .hour{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:13px 12px;border-radius:14px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.10);
-    }
-    .hour strong{font-size:13px;color:#fff;}
-    .hour span{font-size:13px;color:rgba(255,255,255,0.90);}
-
-    .media{display:grid;gap:14px;margin-top:14px;}
-    .media-head{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.10);
-    }
-    .media-head .left{display:flex;flex-direction:column;gap:6px;}
-    .media-head .left h3{margin:0;font-size:16px;color:#fff;letter-spacing:-0.2px;}
-    .media-head .left p{margin:0;font-size:12px;color:rgba(255,255,255,0.72);}
-
-    .vgrid{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:16px;
-      margin-top:10px;
-    }
-    .v-item{
-      position:relative;
-      border-radius:calc(var(--radius) + 2px);
-      overflow:hidden;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-      background:rgba(0,0,0,0.88);
-      aspect-ratio:16/9;
-    }
-    .v-item::before{
-      content:"";
-      position:absolute;inset:0;
-      background:radial-gradient(900px 420px at 40% 20%, rgba(255,255,255,0.06), rgba(0,0,0,0.35));
-      pointer-events:none;
-      z-index:1;
-    }
-    .v-item video{
-      position:relative;z-index:2;
-      width:100%;height:100%;
-      object-fit:contain;
-      display:block;
-      background:#000;
-    }
-    .v-cap{
-      position:absolute;left:12px;bottom:12px;z-index:3;
-      background:rgba(0,0,0,0.62);
-      border:1px solid rgba(255,255,255,0.16);
-      padding:6px 10px;border-radius:999px;
-      font-size:12px;color:rgba(255,255,255,0.90);
-      backdrop-filter:blur(8px);
-    }
-
-    /* GALERIA MAS ORGANIZADA: grid limpio en vez de carrusel */
-    .photo-grid{
+    /* Galeria compacta: 3 fotos + botones */
+    .thumb-grid{
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:12px;
       margin-top:12px;
     }
-    .ph{
+    .thumb{
       border-radius:16px;
       overflow:hidden;
       border:1px solid rgba(255,255,255,0.14);
@@ -318,11 +281,13 @@
       box-shadow:0 14px 36px rgba(0,0,0,0.35);
       aspect-ratio:4/3;
     }
-    .ph img{
-      width:100%;height:100%;
-      display:block;
-      object-fit:cover;
-      transform:scale(1.01);
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);}
+
+    .gallery-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:12px;
     }
 
     .map{
@@ -331,11 +296,6 @@
       background:rgba(255,255,255,0.04);margin-top:14px;
     }
     .map iframe{width:100%;height:250px;border:0;display:block;}
-    .addr{
-      margin-top:12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-      color:rgba(255,255,255,0.90);font-size:13px;
-    }
-    .addr small{color:rgba(255,255,255,0.72);}
 
     footer{
       padding:26px 0 38px;border-top:1px solid var(--border);
@@ -374,6 +334,115 @@
     .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
+    /* Modal galeria */
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+    .modal.is-open{display:flex;}
+    .modal-backdrop{
+      position:absolute;inset:0;
+      background:rgba(0,0,0,0.68);
+      backdrop-filter:blur(8px);
+    }
+    .modal-panel{
+      position:relative;
+      width:min(980px, 100%);
+      max-height:min(88vh, 860px);
+      overflow:hidden;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(10,10,14,0.90);
+      box-shadow:0 30px 80px rgba(0,0,0,0.60);
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.10);
+      background:rgba(0,0,0,0.34);
+    }
+    .tabs{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+    .tab{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.06);
+      color:rgba(255,255,255,0.86);
+      cursor:pointer;
+      user-select:none;
+      font-size:13px;
+    }
+    .tab.is-active{
+      background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
+      color:#0b0b0d;
+      border-color:rgba(255,255,255,0.22);
+      font-weight:800;
+    }
+    .modal-close{
+      width:40px;height:40px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.16);
+      background:rgba(0,0,0,0.55);
+      color:#fff;
+      cursor:pointer;
+      display:grid;place-items:center;
+    }
+    .modal-close:hover{background:rgba(0,0,0,0.70);}
+    .modal-body{
+      padding:14px;
+      overflow:auto;
+    }
+
+    .modal-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:12px;
+    }
+    .modal-item{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(255,255,255,0.04);
+      aspect-ratio:4/3;
+    }
+    .modal-item img{
+      width:100%;height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .modal-videos{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+    .mv{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(0,0,0,0.88);
+      aspect-ratio:16/9;
+      position:relative;
+      box-shadow:0 14px 36px rgba(0,0,0,0.45);
+    }
+    .mv video{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:contain;
+      background:#000;
+    }
+
     @media (max-width: 920px){
       main{padding-top:22px;}
       section{padding:26px 0;}
@@ -390,15 +459,18 @@
       }
       .cards-3{grid-template-columns:1fr;}
       .cards-2{grid-template-columns:1fr;}
-      .vgrid{grid-template-columns:1fr;}
       .svc-img{height:210px;}
-      .map iframe{height:240px;}
       .hero-content{justify-content:center;padding-bottom:20px;}
-      .photo-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .thumb-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+      .modal-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .modal-videos{grid-template-columns:1fr;}
+      .mobile-vid{display:block;}
+      .map iframe{height:240px;}
     }
 
     @media (max-width: 520px){
-      .photo-grid{grid-template-columns:1fr;}
+      .thumb-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+      .modal-grid{grid-template-columns:1fr;}
     }
 
     @media (max-width: 420px){
@@ -413,13 +485,19 @@
 <body>
   <div class="bg-overlay" aria-hidden="true"></div>
 
+  <div class="mobile-vid" aria-hidden="true">
+    <video autoplay loop muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
+      <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
+    </video>
+  </div>
+
   <header class="header">
     <div class="wrap header-inner">
       <a class="brand" href="#inicio" aria-label="Ir al inicio">
         <img src="https://iili.io/qHNHTOP.png" alt="Open Box logo" />
         <div class="txt">
-          <strong><span class="ob-font">OPEN BOX</span> Gimnasio</strong>
-          <span><span class="ob-font">9 de Julio</span>, Buenos Aires</span>
+          <strong><span class="ob-font">OPEN BOX</span></strong>
+          <span>Entrenamiento</span>
         </div>
       </a>
 
@@ -441,15 +519,15 @@
 
               <div class="hero-brand ob-font">OPEN BOX</div>
 
-              <div class="hero-title"><span class="ob-font">9 de Julio</span> · Gimnasio</div>
+              <div class="hero-title">Entrenamientos guiados</div>
 
               <p class="hero-sub">
-                Clases guiadas de lunes a viernes. Te ubicamos segun tu nivel y objetivo para que sostengas el plan.
+                Clases y rutinas por nivel. Te ubicamos segun tu objetivo para sostener el plan y avanzar.
               </p>
 
               <div class="hero-cta">
                 <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
-                <a class="btn" href="#horarios">Ver horarios</a>
+                <a class="btn" href="#galeria">Ver galeria</a>
               </div>
             </div>
           </div>
@@ -458,25 +536,25 @@
         <div class="side">
           <div class="card">
             <div class="card-pad">
-              <h2 class="h2">Por que Open Box</h2>
+              <h2 class="h2">Como se trabaja</h2>
               <p class="p">Una estructura simple para que arranques, mejores y no abandones.</p>
               <ul class="list">
-                <li class="li"><span class="dot"></span><div><strong>Clases guiadas</strong><span>Progresiones y tecnica, sin improvisar.</span></div></li>
-                <li class="li"><span class="dot"></span><div><strong>Plan segun tu objetivo</strong><span>Volver a moverte, bajar, ganar fuerza o rendimiento.</span></div></li>
-                <li class="li"><span class="dot"></span><div><strong>Ambiente de box</strong><span>Constancia, energia y equipo. Se entrena de verdad.</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>Clases guiadas</strong><span>Tecnica y progresiones sin improvisar.</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>Plan segun objetivo</strong><span>Fuerza, rendimiento o recomposicion.</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>Seguimiento</strong><span>Para sostener constancia semana a semana.</span></div></li>
               </ul>
             </div>
           </div>
 
           <div class="card">
             <div class="card-pad">
-              <h2 class="h2">Metodologia</h2>
-              <div class="hours">
-                <div class="hour"><strong>1) Te evaluamos</strong><span>nivel y objetivo</span></div>
-                <div class="hour"><strong>2) Te ubicamos</strong><span>turno y rutina</span></div>
-                <div class="hour"><strong>3) Progresiones</strong><span>paso a paso</span></div>
-                <div class="hour"><strong>4) Seguimiento</strong><span>para sostener</span></div>
-              </div>
+              <h2 class="h2">Metodo</h2>
+              <ul class="list">
+                <li class="li"><span class="dot"></span><div><strong>1) Evaluacion</strong><span>Nivel + objetivo</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>2) Ubicacion</strong><span>Turno + rutina</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>3) Progresion</strong><span>Paso a paso</span></div></li>
+                <li class="li"><span class="dot"></span><div><strong>4) Ajustes</strong><span>Seguimiento</span></div></li>
+              </ul>
             </div>
           </div>
         </div>
@@ -488,47 +566,47 @@
         <div class="card">
           <img class="svc-img" src="https://iili.io/qJnX3Bt.webp" alt="Funcional Open Box" />
           <div class="card-pad">
-            <span class="svc-badge">Servicio 1</span>
+            <span class="svc-badge">Servicio</span>
             <h2 class="h2" style="margin-top:10px;">Funcional</h2>
-            <p class="p">Trabajo completo de fuerza, resistencia y movilidad. Ideal para empezar, sostener constancia y mejorar el estado fisico general.</p>
+            <p class="p">Fuerza, resistencia y movilidad. Ideal para empezar y mejorar el estado fisico general.</p>
           </div>
         </div>
 
         <div class="card">
           <img class="svc-img" src="https://iili.io/qJnw73X.webp" alt="CrossFit Open Box" />
           <div class="card-pad">
-            <span class="svc-badge">Servicio 2</span>
+            <span class="svc-badge">Servicio</span>
             <h2 class="h2" style="margin-top:10px;">CrossFit</h2>
-            <p class="p">WODs con tecnica y progresiones por nivel. Intensidad bien guiada para mejorar rendimiento y fuerza con control.</p>
+            <p class="p">WODs con tecnica y progresiones por nivel. Intensidad bien guiada y controlada.</p>
           </div>
         </div>
 
         <div class="card">
           <img class="svc-img" src="https://iili.io/qJnkDen.webp" alt="Personalizado Open Box" />
           <div class="card-pad">
-            <span class="svc-badge">Servicio 3</span>
+            <span class="svc-badge">Servicio</span>
             <h2 class="h2" style="margin-top:10px;">Personalizado</h2>
-            <p class="p">Plan a medida segun tu objetivo (bajar, fuerza, rendimiento). Acompañamiento y ajustes para que avances semana a semana.</p>
+            <p class="p">Plan a medida segun tu objetivo. Acompañamiento y ajustes para avanzar de verdad.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="horarios">
+    <section id="galeria">
       <div class="grid cards-2">
         <div class="card">
           <div class="card-pad">
-            <span class="kicker">Horarios</span>
-            <h2 class="h2" style="margin-top:10px;">Lunes a viernes</h2>
-            <div class="hours">
-              <div class="hour"><strong>Funcional</strong><span>08:00 y 19:15</span></div>
-              <div class="hour"><strong>Full Body / Tabata</strong><span>09:15</span></div>
-              <div class="hour"><strong>Crosstraining</strong><span>13:30</span></div>
-              <div class="hour"><strong>CrossFit</strong><span>18:00 y 20:30</span></div>
+            <span class="kicker">Ubicacion</span>
+            <div class="map" aria-label="Mapa">
+              <iframe
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
+                title="Mapa">
+              </iframe>
             </div>
-            <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
-              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Quiero empezar</a>
-              <a class="btn" href="#ubicacion">Ver ubicacion</a>
+            <div style="margin-top:14px;">
+              <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Consultar por Instagram</a>
             </div>
           </div>
         </div>
@@ -536,69 +614,19 @@
         <div class="card">
           <div class="card-pad">
             <span class="kicker">Galeria</span>
+            <h2 class="h2" style="margin-top:10px;">Fotos y videos</h2>
+            <p class="p">Vista rapida (3 fotos). Para ver todo, abre la galeria completa.</p>
 
-            <div class="media">
-              <div class="media-head">
-                <div class="left">
-                  <h3>Videos + fotos</h3>
-                  <p>Videos sin sonido por defecto (muted) y fotos en grilla prolija.</p>
-                </div>
-              </div>
-
-              <div class="vgrid">
-                <div class="v-item">
-                  <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
-                  </video>
-                  <div class="v-cap">Video 1</div>
-                </div>
-                <div class="v-item">
-                  <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
-                    <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
-                  </video>
-                  <div class="v-cap">Video 2</div>
-                </div>
-              </div>
-
-              <div class="photo-grid" aria-label="Galeria de fotos">
-                <div class="ph"><img src="https://iili.io/qJKxm5N.jpg" alt="Open Box foto 1" /></div>
-                <div class="ph"><img src="https://iili.io/qJKzHzX.jpg" alt="Open Box foto 2" /></div>
-                <div class="ph"><img src="https://iili.io/qJKxybt.jpg" alt="Open Box foto 3" /></div>
-                <div class="ph"><img src="https://iili.io/qJKxpeI.jpg" alt="Open Box foto 4" /></div>
-                <div class="ph"><img src="https://iili.io/qJKzF1f.jpg" alt="Open Box foto 5" /></div>
-                <div class="ph"><img src="https://iili.io/qJKz3qG.jpg" alt="Open Box foto 6" /></div>
-                <div class="ph"><img src="https://iili.io/qJKzKg4.jpg" alt="Open Box foto 7" /></div>
-              </div>
-
+            <div class="thumb-grid" aria-label="3 fotos">
+              <div class="thumb"><img src="https://iili.io/qJKxm5N.jpg" alt="Foto 1" /></div>
+              <div class="thumb"><img src="https://iili.io/qJKzHzX.jpg" alt="Foto 2" /></div>
+              <div class="thumb"><img src="https://iili.io/qJKxybt.jpg" alt="Foto 3" /></div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="ubicacion">
-      <div class="card">
-        <div class="card-pad">
-          <span class="kicker">Ubicacion</span>
-          <h2 class="h2" style="margin-top:10px;">Av. Agustin Alvarez 25, 9 de Julio</h2>
-
-          <div class="map" aria-label="Mapa">
-            <iframe
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
-              title="Mapa Open Box">
-            </iframe>
-          </div>
-
-          <div class="addr">
-            <strong>Direccion:</strong>
-            <span>Av. Agustin Alvarez 25, 9 de Julio, Buenos Aires</span>
-            <small>Consultas por Instagram</small>
-          </div>
-
-          <div style="margin-top:16px;">
-            <a class="btn btn-primary" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Hablar por Instagram</a>
+            <div class="gallery-actions">
+              <button class="btn btn-primary" type="button" id="btnFotos">Ver mas fotos</button>
+              <button class="btn" type="button" id="btnVideos">Ver videos</button>
+            </div>
           </div>
         </div>
       </div>
@@ -626,9 +654,57 @@
     </span>
     <span class="t">
       <strong>@gimnasio.openbox</strong>
-      <span>Consultar horarios</span>
+      <span>Consultar</span>
     </span>
   </a>
+
+  <!-- MODAL GALERIA -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Galeria">
+      <div class="modal-top">
+        <div class="tabs">
+          <div class="tab is-active" id="tabFotos" data-tab="fotos">Fotos</div>
+          <div class="tab" id="tabVideos" data-tab="videos">Videos</div>
+        </div>
+        <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M6 6l12 12M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="panelFotos">
+          <div class="modal-grid">
+            <div class="modal-item"><img src="https://iili.io/qJKxm5N.jpg" alt="Foto 1" /></div>
+            <div class="modal-item"><img src="https://iili.io/qJKzHzX.jpg" alt="Foto 2" /></div>
+            <div class="modal-item"><img src="https://iili.io/qJKxybt.jpg" alt="Foto 3" /></div>
+            <div class="modal-item"><img src="https://iili.io/qJKxpeI.jpg" alt="Foto 4" /></div>
+            <div class="modal-item"><img src="https://iili.io/qJKzF1f.jpg" alt="Foto 5" /></div>
+            <div class="modal-item"><img src="https://iili.io/qJKz3qG.jpg" alt="Foto 6" /></div>
+            <div class="modal-item"><img src="https://iili.io/qJKzKg4.jpg" alt="Foto 7" /></div>
+          </div>
+        </div>
+
+        <div id="panelVideos" style="display:none;">
+          <div class="modal-videos">
+            <div class="mv">
+              <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0000%281%29.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="mv">
+              <video controls playsinline muted preload="metadata" poster="https://iili.io/qHOTGgp.png">
+                <source src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
@@ -646,6 +722,66 @@
       }, { root: null, threshold: 0.01 });
 
       io.observe(footer);
+    })();
+
+    (function(){
+      var modal = document.getElementById("modal");
+      var backdrop = document.getElementById("modalBackdrop");
+      var closeBtn = document.getElementById("modalClose");
+
+      var btnFotos = document.getElementById("btnFotos");
+      var btnVideos = document.getElementById("btnVideos");
+
+      var tabFotos = document.getElementById("tabFotos");
+      var tabVideos = document.getElementById("tabVideos");
+      var panelFotos = document.getElementById("panelFotos");
+      var panelVideos = document.getElementById("panelVideos");
+
+      function openModal(which){
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        setTab(which || "fotos");
+      }
+
+      function closeModal(){
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+        stopVideos();
+      }
+
+      function stopVideos(){
+        try{
+          var vids = panelVideos.querySelectorAll("video");
+          vids.forEach(function(v){
+            v.pause();
+            v.currentTime = 0;
+          });
+        }catch(e){}
+      }
+
+      function setTab(which){
+        var isFotos = which === "fotos";
+        tabFotos.classList.toggle("is-active", isFotos);
+        tabVideos.classList.toggle("is-active", !isFotos);
+        panelFotos.style.display = isFotos ? "" : "none";
+        panelVideos.style.display = isFotos ? "none" : "";
+        if(isFotos) stopVideos();
+      }
+
+      btnFotos.addEventListener("click", function(){ openModal("fotos"); });
+      btnVideos.addEventListener("click", function(){ openModal("videos"); });
+
+      tabFotos.addEventListener("click", function(){ setTab("fotos"); });
+      tabVideos.addEventListener("click", function(){ setTab("videos"); });
+
+      closeBtn.addEventListener("click", closeModal);
+      backdrop.addEventListener("click", closeModal);
+
+      window.addEventListener("keydown", function(e){
+        if(e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+      });
     })();
   </script>
 </body>
