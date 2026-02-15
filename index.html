@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
@@ -109,6 +110,23 @@
     }
     .neon-pulse{animation:neonPulse 2.05s ease-in-out infinite;}
 
+    .reveal{
+      opacity:0;
+      transform:translateX(22px);
+      filter:blur(0.2px);
+      transition:opacity .55s ease, transform .55s ease;
+      will-change:opacity,transform;
+    }
+    .reveal[data-reveal="left"]{transform:translateX(-22px);}
+    .reveal.is-in{
+      opacity:1;
+      transform:translateX(0);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1;transform:none;transition:none;}
+      .neon-pulse{animation:none;}
+    }
+
     .header{
       position:sticky;top:0;z-index:60;
       backdrop-filter:blur(10px);
@@ -136,6 +154,15 @@
       white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     }
 
+    .hero-subtitle{
+      margin-top:6px;
+      font-size:13px;
+      letter-spacing:0.6px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.86);
+      text-shadow:0 14px 36px rgba(0,0,0,0.86);
+    }
+
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:10px;
       padding:10px 14px;border-radius:999px;border:1px solid var(--border);
@@ -153,7 +180,6 @@
     .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
     .nav-actions{display:flex;align-items:center;gap:10px;}
-
     .burger{
       width:44px;height:44px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.16);
@@ -243,17 +269,28 @@
       display:block;
       background:#000;
       opacity:0.98;
+      z-index:0;
     }
 
-    /* CAMBIO 1: VELO 15% EN EL HERO (APENAS) */
+    /* OPACIDAD HERO (MISMA QUE TARJETAS) */
+    .hero-left::before{
+      content:"";
+      position:absolute;inset:0;pointer-events:none;
+      background:var(--card);
+      z-index:1;
+    }
+
     .hero-left::after{
       content:"";
       position:absolute;inset:0;pointer-events:none;
-      background:rgba(0,0,0,0.15);
+      background:
+        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.08), rgba(0,0,0,0.22)),
+        linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.18));
+      z-index:2;
     }
 
     .hero-content{
-      position:relative;z-index:2;height:100%;
+      position:relative;z-index:3;height:100%;
       display:flex;flex-direction:column;justify-content:flex-end;
       padding:22px;padding-bottom:32px;
     }
@@ -273,7 +310,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:rgba(0,0,0,0.60);
+      background:rgba(0,0,0,0.18);
       border:1px solid rgba(255,255,255,0.16);
       border-radius:18px;
       box-shadow:0 18px 44px rgba(0,0,0,0.45);
@@ -353,6 +390,31 @@
     }
     .map iframe{width:100%;height:230px;border:0;display:block;}
 
+    .map-ig{
+      display:none;
+      width:100%;
+      height:230px;
+    }
+    .map-ig a{
+      display:block;
+      width:100%;
+      height:100%;
+    }
+    .map-ig img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      border:0;
+    }
+
+    .addr{
+      margin:10px 0 0;
+      font-size:13px;
+      color:rgba(255,255,255,0.86);
+      line-height:1.35;
+    }
+
     .mini-link{
       display:inline-flex;align-items:center;gap:8px;
       margin-top:12px;
@@ -375,6 +437,8 @@
       margin-top:12px;
       touch-action:pan-y;
       user-select:none;
+      width:100%;
+      max-width:100%;
     }
     .track{
       display:flex;
@@ -392,7 +456,8 @@
       justify-content:center;
       padding:14px;
     }
-    .slide img{
+    .slide img,
+    .slide video{
       width:100%;
       height:100%;
       object-fit:contain;
@@ -401,6 +466,7 @@
       border-radius:14px;
       border:1px solid rgba(255,255,255,0.10);
     }
+    .slide video{outline:none;}
 
     .car-ui{
       position:absolute;
@@ -499,12 +565,29 @@
       background:rgba(0,0,0,0.30);margin-top:18px;
     }
     .footer-inner{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      color:var(--muted);font-size:12px;
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap:12px;
+      color:var(--muted);
+      font-size:12px;
+    }
+    .footer-center{
+      justify-self:center;
+      text-align:center;
+      white-space:nowrap;
+    }
+    .footer-right{
+      justify-self:end;
+      text-align:right;
     }
     .footer-inner a{
       color:rgba(255,255,255,0.90);
       border-bottom:1px dashed rgba(255,255,255,0.30);
+    }
+    .ciborg-link{
+      color:#00e5ff;
+      border-bottom:1px dashed rgba(0,229,255,0.60);
     }
 
     .float-ig{
@@ -531,14 +614,30 @@
     .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-    /* CAMBIO 2: LOGO WHATSAPP ARRIBA DEL BOTON IG (SOLO DESKTOP) */
-    .ig-stack{display:flex;flex-direction:column;align-items:center;gap:8px;}
-    .wa-logo-top{
-      width:28px;height:28px;
-      object-fit:contain;
-      display:block;
-      filter:drop-shadow(0 10px 24px rgba(0,0,0,0.45));
+    /* WHATSAPP FLOTANTE ARRIBA DEL IG */
+    .float-wa{
+      position: fixed;right:16px;bottom:76px;z-index:70;
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:999px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:rgba(0,0,0,0.62);
+      backdrop-filter:blur(10px);
+      box-shadow:0 18px 44px rgba(0,0,0,0.45);
+      color:rgba(255,255,255,0.92);
+      max-width:calc(100vw - 32px);
+      transition:opacity .15s ease, transform .15s ease;
     }
+    .float-wa.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
+    .wa-badge{
+      width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(37,211,102,0.98), rgba(18,140,126,0.92));
+      border:1px solid rgba(255,255,255,0.18);
+      flex:0 0 auto;
+    }
+    .wa-badge svg{width:18px;height:18px;}
+    .float-wa .t{display:flex;flex-direction:column;line-height:1.05;min-width:0;}
+    .float-wa .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .float-wa .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
     @media (max-width: 920px){
       main{padding-top:22px;}
@@ -550,11 +649,16 @@
       .cards-2{grid-template-columns:1fr;}
       .svc-img{height:210px;}
       .map iframe{height:230px;}
+      .map-ig{height:230px;}
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
       .ig-header-btn{display:none;}
-      .ig-stack{display:none;}
       .hour-row{grid-template-columns: 112px 1fr;}
+      .footer-inner{grid-template-columns:1fr;justify-items:center;text-align:center;}
+      .footer-right{justify-self:center;text-align:center;}
+      .footer-center{justify-self:center;text-align:center;white-space:normal;}
+      .reveal, .reveal[data-reveal="left"]{transform:translateY(10px);}
+      .reveal.is-in{transform:translateY(0);}
     }
 
     @media (max-width: 520px){
@@ -565,6 +669,7 @@
       .brand img{width:40px;height:40px;}
       .btn{padding:10px 12px;}
       .float-ig{right:12px;bottom:12px;}
+      .float-wa{right:12px;bottom:72px;}
     }
   </style>
 </head>
@@ -578,15 +683,12 @@
         <img src="https://iili.io/qHNHTOP.png" alt="Open Box logo" />
         <div class="txt">
           <strong><span class="ob-font">OPEN BOX</span></strong>
-          <span>Entrenamiento</span>
+          <span>Centro Fitness</span>
         </div>
       </a>
 
       <div class="nav-actions">
-        <div class="ig-stack">
-          <img class="wa-logo-top" src="https://iili.io/fm1NjzQ.jpg" alt="WhatsApp" />
-          <a class="btn btn-primary ig-header-btn" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Ver Instagram</a>
-        </div>
+        <a class="btn btn-primary ig-header-btn" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Ver Instagram</a>
 
         <button class="burger" id="burger" type="button" aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none">
@@ -616,7 +718,7 @@
   </aside>
 
   <main class="wrap" id="inicio">
-    <section>
+    <section class="reveal" data-reveal="left">
       <div class="hero">
         <div class="hero-left" aria-label="Hero">
           <video class="hero-video" autoplay loop muted playsinline preload="metadata" poster="https://iili.io/qHOTGgp.png">
@@ -628,6 +730,7 @@
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
 
               <div class="hero-brand ob-font neon-pulse">OPEN BOX</div>
+              <div class="hero-subtitle">Centro Fitness</div>
 
               <div class="hero-title">Entrenamientos guiados</div>
 
@@ -644,7 +747,7 @@
         </div>
 
         <div class="side">
-          <div class="card">
+          <div class="card reveal" data-reveal="right">
             <div class="card-pad">
               <h2 class="h2">Como se trabaja</h2>
               <p class="p">Una estructura simple para que arranques, mejores y no abandones.</p>
@@ -656,7 +759,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card reveal" data-reveal="left">
             <div class="card-pad">
               <h2 class="h2">Metodo</h2>
               <ul class="list">
@@ -671,9 +774,9 @@
       </div>
     </section>
 
-    <section id="servicios">
+    <section id="servicios" class="reveal" data-reveal="right">
       <div class="grid cards-3">
-        <div class="card">
+        <div class="card reveal" data-reveal="left">
           <img class="svc-img" src="https://iili.io/qJnX3Bt.webp" alt="Funcional" />
           <div class="card-pad">
             <span class="svc-badge">Servicio</span>
@@ -682,7 +785,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card reveal" data-reveal="right">
           <img class="svc-img" src="https://iili.io/qJnw73X.webp" alt="CrossFit" />
           <div class="card-pad">
             <span class="svc-badge">Servicio</span>
@@ -691,7 +794,7 @@
           </div>
         </div>
 
-        <div class="card">
+        <div class="card reveal" data-reveal="left">
           <img class="svc-img" src="https://iili.io/qJnkDen.webp" alt="Personalizado" />
           <div class="card-pad">
             <span class="svc-badge">Servicio</span>
@@ -702,7 +805,7 @@
       </div>
     </section>
 
-    <section id="horarios">
+    <section id="horarios" class="reveal" data-reveal="left">
       <div class="card">
         <div class="card-pad">
           <div class="hours-top">
@@ -730,10 +833,10 @@
 
     <section id="galeria">
       <div class="grid cards-2">
-        <div class="card">
+        <div class="card reveal" data-reveal="left">
           <div class="card-pad">
             <span class="kicker">Galeria</span>
-            <h2 class="h2" style="margin-top:10px;">Fotos</h2>
+            <h2 class="h2" style="margin-top:10px;">Fotos y videos</h2>
             <p class="p">En moviles: automatico y tambien podes deslizar con el dedo.</p>
 
             <div class="carousel" id="carousel">
@@ -746,6 +849,14 @@
                 <div class="slide"><img src="https://iili.io/qJKzF1f.jpg" alt="Foto 5" /></div>
                 <div class="slide"><img src="https://iili.io/qJKz3qG.jpg" alt="Foto 6" /></div>
                 <div class="slide"><img src="https://iili.io/qJKzKg4.jpg" alt="Foto 7" /></div>
+
+                <div class="slide">
+                  <video class="car-video" src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID-20260214-WA0002.mp4" muted playsinline autoplay preload="metadata"></video>
+                </div>
+
+                <div class="slide">
+                  <video class="car-video" src="https://uzurdpsiniidxrbpqbtv.supabase.co/storage/v1/object/public/Videos%20gym/VID_20260214_140420_189.mp4" muted playsinline autoplay preload="metadata"></video>
+                </div>
               </div>
 
               <div class="car-ui">
@@ -771,16 +882,25 @@
           </div>
         </div>
 
-        <div class="card" id="mapa">
+        <div class="card reveal" data-reveal="right" id="mapa">
           <div class="card-pad">
             <span class="kicker">Ubicacion</span>
+            <div class="addr">Agustin Alvarez 25 | 9 de Julio, Pcia. de Bs As</div>
+
             <div class="map" aria-label="Mapa">
               <iframe
+                id="mapIframe"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
                 title="Mapa">
               </iframe>
+
+              <div class="map-ig" id="mapIg">
+                <a href="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires" target="_blank" rel="noopener">
+                  <img src="https://iili.io/qJugOVS.png" alt="Abrir ubicacion en Google Maps" />
+                </a>
+              </div>
             </div>
 
             <a class="mini-link" href="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires" target="_blank" rel="noopener">
@@ -794,14 +914,29 @@
 
   <footer id="footer">
     <div class="wrap footer-inner">
-      <div>© <span id="y"></span> <span class="ob-font">OPEN BOX</span></div>
-      <div>
-        <a href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Instagram</a>
-        &nbsp;·&nbsp;
-        <a href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a>
+      <div></div>
+
+      <div class="footer-center">
+        <span class="ob-font">Open Box</span> © <span id="y"></span>
+      </div>
+
+      <div class="footer-right">
+        <a class="ciborg-link" href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a>
       </div>
     </div>
   </footer>
+
+  <a class="float-wa" id="floatWa" href="https://wa.me/5492317533923" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+    <span class="wa-badge" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13.601 2.326A7.89 7.89 0 0 0 8.013 0C3.58 0 .03 3.56.03 7.94c0 1.4.37 2.77 1.07 3.98L0 16l4.2-1.1a7.92 7.92 0 0 0 3.81.97h.01c4.43 0 7.98-3.56 7.98-7.94a7.9 7.9 0 0 0-2.399-5.604ZM8.02 14.53h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.55 6.55 0 0 1-1.01-3.5c0-3.63 2.98-6.58 6.64-6.58a6.6 6.6 0 0 1 4.69 1.93 6.53 6.53 0 0 1 1.95 4.66c0 3.63-2.98 6.58-6.65 6.58Zm3.64-4.99c-.2-.1-1.17-.58-1.35-.65-.18-.07-.31-.1-.44.1-.13.2-.5.65-.62.78-.11.13-.22.15-.42.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.11-.2-.01-.31.08-.41.08-.08.2-.22.3-.33.1-.11.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.44-1.05-.6-1.44-.16-.38-.33-.33-.44-.33h-.38c-.13 0-.35.05-.53.25-.18.2-.7.69-.7 1.68 0 .99.72 1.95.82 2.08.1.13 1.42 2.16 3.43 3.03.48.21.85.34 1.14.43.48.15.92.13 1.27.08.39-.06 1.17-.48 1.34-.94.17-.46.17-.85.12-.94-.05-.09-.18-.14-.38-.24Z"/>
+      </svg>
+    </span>
+    <span class="t">
+      <strong>WhatsApp</strong>
+      <span>2317533923</span>
+    </span>
+  </a>
 
   <a class="float-ig" id="floatIg" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Abrir Instagram">
     <span class="ig-badge" aria-hidden="true">
@@ -823,16 +958,41 @@
     (function(){
       var footer = document.getElementById("footer");
       var floatIg = document.getElementById("floatIg");
-      if(!footer || !floatIg) return;
+      var floatWa = document.getElementById("floatWa");
+      if(!footer) return;
 
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
-          if(e.isIntersecting) floatIg.classList.add("is-hidden");
-          else floatIg.classList.remove("is-hidden");
+          var hide = !!e.isIntersecting;
+          if(floatIg) floatIg.classList.toggle("is-hidden", hide);
+          if(floatWa) floatWa.classList.toggle("is-hidden", hide);
         });
       }, { root: null, threshold: 0.01 });
 
       io.observe(footer);
+    })();
+
+    (function(){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting) e.target.classList.add("is-in");
+        });
+      }, { root:null, threshold:0.12 });
+
+      document.querySelectorAll(".reveal").forEach(function(el){
+        io.observe(el);
+      });
+    })();
+
+    (function(){
+      var ua = navigator.userAgent || "";
+      var isIG = /Instagram/i.test(ua);
+      if(!isIG) return;
+
+      var iframe = document.getElementById("mapIframe");
+      var mapIg = document.getElementById("mapIg");
+      if(iframe) iframe.style.display = "none";
+      if(mapIg) mapIg.style.display = "block";
     })();
 
     (function(){
@@ -853,13 +1013,51 @@
       function isMobile(){
         return window.matchMedia && window.matchMedia("(max-width: 920px)").matches;
       }
+
+      function getActiveVideo(){
+        var active = slides[idx];
+        if(!active) return null;
+        return active.querySelector && active.querySelector("video.car-video");
+      }
+
+      function pauseAllVideos(){
+        slides.forEach(function(s){
+          var v = s.querySelector && s.querySelector("video.car-video");
+          if(v){
+            try{ v.pause(); }catch(_){}
+            try{ v.currentTime = 0; }catch(_){}
+          }
+        });
+      }
+
+      function playActiveVideo(){
+        var v = getActiveVideo();
+        if(!v) return;
+        v.muted = true;
+        v.playsInline = true;
+        v.autoplay = true;
+        var p = v.play();
+        if(p && p.catch) p.catch(function(){});
+      }
+
       function setDelay(){
         return isMobile() ? 2400 : 99999999;
       }
+
+      function updateDots(){
+        var dots = dotsWrap.querySelectorAll(".dotb");
+        dots.forEach(function(d, i){
+          d.classList.toggle("is-active", i === idx);
+        });
+      }
+
       function setTransform(){
         track.style.transform = "translateX(" + (-idx * 100) + "%)";
         updateDots();
+        pauseAllVideos();
+        playActiveVideo();
       }
+
       function buildDots(){
         dotsWrap.innerHTML = "";
         slides.forEach(function(_, i){
@@ -874,31 +1072,30 @@
           dotsWrap.appendChild(b);
         });
       }
-      function updateDots(){
-        var dots = dotsWrap.querySelectorAll(".dotb");
-        dots.forEach(function(d, i){
-          d.classList.toggle("is-active", i === idx);
-        });
-      }
+
       function nextSlide(){
         idx = (idx + 1) % slides.length;
         setTransform();
       }
+
       function prevSlide(){
         idx = (idx - 1 + slides.length) % slides.length;
         setTransform();
       }
+
       function start(){
         var delay = setDelay();
         if(delay > 60000000) return;
         if(timer) return;
         timer = setInterval(nextSlide, delay);
       }
+
       function stop(){
         if(!timer) return;
         clearInterval(timer);
         timer = null;
       }
+
       function restart(){
         stop();
         start();
@@ -915,11 +1112,13 @@
         stop();
         track.classList.add("is-dragging");
       }
+
       function pointerMove(clientX){
         if(!isDown) return;
         currentX = clientX;
         if(Math.abs(currentX - startX) > 8) moved = true;
       }
+
       function pointerUp(){
         if(!isDown) return;
         isDown = false;
@@ -964,6 +1163,19 @@
       carousel.addEventListener("mouseleave", start);
       window.addEventListener("resize", function(){ restart(); });
 
+      slides.forEach(function(s){
+        var v = s.querySelector && s.querySelector("video.car-video");
+        if(v){
+          v.muted = true;
+          v.playsInline = true;
+          v.autoplay = true;
+          v.addEventListener("ended", function(){
+            nextSlide();
+            restart();
+          });
+        }
+      });
+
       buildDots();
       setTransform();
       start();
@@ -1000,3 +1212,4 @@
   </script>
 </body>
 </html>
+```
