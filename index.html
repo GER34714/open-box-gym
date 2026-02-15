@@ -117,10 +117,7 @@
       will-change:opacity,transform;
     }
     .reveal[data-reveal="left"]{transform:translateX(-22px);}
-    .reveal.is-in{
-      opacity:1;
-      transform:translateX(0);
-    }
+    .reveal.is-in{opacity:1;transform:translateX(0);}
     @media (prefers-reduced-motion: reduce){
       .reveal{opacity:1;transform:none;transition:none;}
       .neon-pulse{animation:none;}
@@ -395,19 +392,9 @@
     }
     .map iframe{width:100%;height:230px;border:0;display:block;}
 
-    .map-ig{
-      display:none;
-      width:100%;
-      height:230px;
-    }
+    .map-ig{display:none;width:100%;height:230px;}
     .map-ig a{display:block;width:100%;height:100%;}
-    .map-ig img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      border:0;
-    }
+    .map-ig img{width:100%;height:100%;object-fit:cover;display:block;border:0;}
 
     .addr{
       margin:10px 0 0;
@@ -441,11 +428,7 @@
       width:100%;
       max-width:100%;
     }
-    .track{
-      display:flex;
-      transition:transform .55s ease;
-      will-change:transform;
-    }
+    .track{display:flex;transition:transform .55s ease;will-change:transform;}
     .track.is-dragging{transition:none;}
     .slide{
       min-width:100%;
@@ -457,8 +440,7 @@
       justify-content:center;
       padding:14px;
     }
-    .slide img,
-    .slide video{
+    .slide img,.slide video{
       width:100%;
       height:100%;
       object-fit:contain;
@@ -492,14 +474,7 @@
     }
     .car-btn:hover{transform:translateY(-1px);background:rgba(0,0,0,0.72);}
 
-    .dots{
-      pointer-events:auto;
-      display:flex;
-      gap:8px;
-      align-items:center;
-      justify-content:center;
-      flex:1;
-    }
+    .dots{pointer-events:auto;display:flex;gap:8px;align-items:center;justify-content:center;flex:1;}
     .dotb{
       width:9px;height:9px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.20);
@@ -573,13 +548,10 @@
     }
     .footer-center{justify-self:center;text-align:center;white-space:nowrap;}
     .footer-right{justify-self:end;text-align:right;}
-    .footer-inner a{
-      color:rgba(255,255,255,0.90);
-      border-bottom:1px dashed rgba(255,255,255,0.30);
-    }
+    .footer-inner a{color:rgba(255,255,255,0.90);border-bottom:1px dashed rgba(255,255,255,0.30);}
     .ciborg-link{color:#00e5ff;border-bottom:1px dashed rgba(0,229,255,0.60);}
 
-    /* WHATSAPP FLOTANTE (UNICO) */
+    /* WHATSAPP FLOTANTE (LOGO OFICIAL TAL CUAL, SIN RECUADRO) */
     .float-wa{
       position: fixed;right:16px;bottom:16px;z-index:70;
       display:inline-flex;align-items:center;gap:10px;
@@ -593,14 +565,14 @@
       transition:opacity .15s ease, transform .15s ease;
     }
     .float-wa.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
-    .wa-badge{
-      width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
-      background:linear-gradient(135deg, rgba(37,211,102,0.98), rgba(18,140,126,0.92));
-      border:1px solid rgba(255,255,255,0.18);
-      flex:0 0 auto;
-    }
-    .wa-badge img{
-      width:18px;height:18px;display:block;object-fit:contain;
+    .wa-logo{
+      width:34px;height:34px;flex:0 0 auto;
+      display:block;
+      object-fit:contain;
+      background:transparent;
+      border:0;
+      border-radius:0;
+      box-shadow:none;
       filter:drop-shadow(0 10px 18px rgba(0,0,0,0.35));
     }
     .float-wa .t{display:flex;flex-direction:column;line-height:1.05;min-width:0;}
@@ -635,6 +607,7 @@
       .brand img{width:40px;height:40px;}
       .btn{padding:10px 12px;}
       .float-wa{right:12px;bottom:12px;}
+      .wa-logo{width:32px;height:32px;}
     }
   </style>
 </head>
@@ -899,9 +872,7 @@
   </footer>
 
   <a class="float-wa" id="floatWa" href="https://wa.me/5492317533923" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
-    <span class="wa-badge" aria-hidden="true">
-      <img src="https://iili.io/fm1NjzQ.jpg" alt="WhatsApp" />
-    </span>
+    <img class="wa-logo" src="https://iili.io/fm1NjzQ.jpg" alt="WhatsApp" />
     <span class="t">
       <strong>WhatsApp</strong>
       <span>2317533923</span>
