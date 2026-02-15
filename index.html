@@ -556,9 +556,9 @@
     }
     .credit-cyan{color:#00e5ff !important;}
 
-    /* WhatsApp flotante */
+    /* WhatsApp flotante (ARRIBA) */
     .float-wa{
-      position: fixed;right:16px;bottom:16px;z-index:70;
+      position: fixed;right:16px;bottom:76px;z-index:70;
       width:48px;height:48px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.22);
       background: linear-gradient(135deg, #25D366, #128C7E);
@@ -572,9 +572,9 @@
     .float-wa.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
     .float-wa svg{width:22px;height:22px;display:block;color:#0b0b0d;}
 
-    /* Instagram flotante (botoncito color de instagram, texto normal) */
+    /* Instagram flotante (ABAJO, juntos) */
     .float-ig{
-      position: fixed;right:16px;bottom:76px;z-index:70;
+      position: fixed;right:16px;bottom:16px;z-index:70;
       display:inline-flex;align-items:center;gap:10px;
       padding:10px 12px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.18);
@@ -619,8 +619,8 @@
     @media (max-width: 520px){
       .slide{height:300px;padding:10px;}
       .btn{padding:10px 12px;}
-      .float-ig{right:12px;bottom:70px;}
-      .float-wa{right:12px;bottom:12px;}
+      .float-ig{right:12px;bottom:12px;}
+      .float-wa{right:12px;bottom:72px;}
     }
 
     @media (max-width: 420px){
