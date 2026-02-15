@@ -145,12 +145,6 @@
       user-select:none;cursor:pointer;white-space:nowrap;
     }
     .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);}
-    .btn-primary{
-      background:linear-gradient(135deg, rgba(124,92,255,0.95), rgba(32,227,178,0.85));
-      border-color:rgba(255,255,255,0.20);
-      color:#0b0b0d;font-weight:800;
-    }
-    .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
     .nav-actions{display:flex;align-items:center;gap:10px;}
     .burger{
@@ -164,11 +158,25 @@
     }
     .burger svg{width:20px;height:20px;opacity:0.95;}
 
-    /* NUEVO: botones header (solo desktop) */
     .header-cta{display:inline-flex;align-items:center;gap:10px;}
-    .header-wa svg{width:18px;height:18px;display:block;}
-    .header-ig{letter-spacing:0.6px;text-transform:uppercase;font-weight:800;}
-    .header-wa{font-weight:900;}
+    .header-wa{
+      font-weight:900;
+      background:linear-gradient(135deg, #25D366, #128C7E);
+      border-color:rgba(255,255,255,0.20);
+      color:#0b0b0d;
+    }
+    .header-wa:hover{filter:brightness(1.06);}
+    .header-wa svg{width:18px;height:18px;display:block;color:#0b0b0d;}
+
+    .header-ig{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:0.6px;
+    }
+    .ig-icon{width:18px;height:18px;display:block;}
 
     .drawer-backdrop{
       position:fixed;inset:0;z-index:80;
@@ -291,6 +299,15 @@
       line-height:0.95;
       margin:10px 0 6px;
     }
+    .hero-subtitle{
+      margin:0 0 6px;
+      font-size:12px;
+      letter-spacing:0.6px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.88);
+      text-shadow:0 14px 36px rgba(0,0,0,0.86);
+    }
+
     .hero-title{
       font-size:clamp(18px,2.2vw,26px);
       margin:6px 0 0;
@@ -356,6 +373,30 @@
       margin-top:12px;
     }
     .map iframe{width:100%;height:230px;border:0;display:block;}
+
+    .map-fallback{
+      display:block;
+      width:100%;
+      border-radius:calc(var(--radius) + 2px);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:var(--shadow);
+      background:#000;
+      margin-top:12px;
+    }
+    .map-fallback img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .addr{
+      margin-top:10px;
+      color:rgba(255,255,255,0.86);
+      font-size:13px;
+      line-height:1.4;
+    }
 
     .mini-link{
       display:inline-flex;align-items:center;gap:8px;
@@ -512,27 +553,43 @@
       background:rgba(0,0,0,0.30);margin-top:18px;
     }
     .footer-inner{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-      color:var(--muted);font-size:12px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-align:center;
+      color:var(--muted);
+      font-size:12px;
     }
-    .footer-inner a{
-      color:rgba(255,255,255,0.90);
-      border-bottom:1px dashed rgba(255,255,255,0.30);
+    .footer-main{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      color:rgba(255,255,255,0.92);
+    }
+    .footer-credit{
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
     .credit-cyan{color:#00e5ff !important;}
 
     .float-wa{
       position: fixed;right:16px;bottom:16px;z-index:70;
       width:56px;height:56px;border-radius:999px;
-      border:1px solid rgba(255,255,255,0.18);
-      background:rgba(0,0,0,0.62);
+      border:1px solid rgba(255,255,255,0.22);
+      background: linear-gradient(135deg, #25D366, #128C7E);
       backdrop-filter:blur(10px);
       box-shadow:0 18px 44px rgba(0,0,0,0.45);
       display:grid;place-items:center;
       transition:opacity .15s ease, transform .15s ease;
+      color:#0b0b0d;
     }
+    .float-wa:hover{filter:brightness(1.06);}
     .float-wa.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
-    .float-wa svg{width:26px;height:26px;display:block;}
+    .float-wa svg{width:26px;height:26px;display:block;color:#0b0b0d;}
 
     @media (max-width: 920px){
       main{padding-top:22px;}
@@ -547,8 +604,6 @@
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
       .hour-row{grid-template-columns: 112px 1fr;}
-
-      /* NUEVO: oculto CTAs header en mobile, queda burger + menu */
       .header-cta{display:none;}
     }
 
@@ -578,16 +633,22 @@
       </a>
 
       <div class="nav-actions">
-        <!-- NUEVO: CTA WhatsApp + boton Instagram (desktop) -->
         <div class="header-cta">
-          <a class="btn btn-primary header-wa" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+          <a class="btn header-wa" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
               <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
             </svg>
             WhatsApp
           </a>
 
-          <a class="btn header-ig" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">SEGUINOS</a>
+          <a class="btn header-ig" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">
+            <svg class="ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M12 16.2A4.2 4.2 0 1 0 12 7.8a4.2 4.2 0 0 0 0 8.4Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M17.3 6.7h.01" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+            </svg>
+            SEGUINOS
+          </a>
         </div>
 
         <button class="burger" id="burger" type="button" aria-label="Abrir menu">
@@ -614,7 +675,6 @@
     <a href="#horarios" data-close>Horarios <span>›</span></a>
     <a href="#galeria" data-close>Galeria <span>›</span></a>
     <a href="#mapa" data-close>Mapa <span>›</span></a>
-    <!-- NUEVO: WhatsApp en menu -->
     <a href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener" data-close>WhatsApp <span>↗</span></a>
     <a href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" data-close>Instagram <span>↗</span></a>
   </aside>
@@ -632,6 +692,7 @@
               <span class="kicker">Funcional · CrossFit · Personalizado</span>
 
               <div class="hero-brand ob-font neon-pulse">OPEN BOX</div>
+              <div class="hero-subtitle">CENTRO FITNESS</div>
 
               <div class="hero-title">Entrenamientos guiados</div>
 
@@ -640,7 +701,7 @@
               </p>
 
               <div class="hero-cta">
-                <a class="btn btn-primary" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener">Consultar por WhatsApp</a>
+                <a class="btn header-wa" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener">Consultar por WhatsApp</a>
                 <a class="btn" href="#horarios">Ver horarios</a>
               </div>
             </div>
@@ -789,8 +850,12 @@
         <div class="card" id="mapa">
           <div class="card-pad">
             <span class="kicker">Ubicacion</span>
-            <div class="map" aria-label="Mapa">
+
+            <div class="addr">Agustin Alvarez 25 | 9 de Julio | Pcia de Bs As</div>
+
+            <div class="map" id="mapWrap" aria-label="Mapa">
               <iframe
+                id="mapIframe"
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
                 src="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires&output=embed"
@@ -798,7 +863,7 @@
               </iframe>
             </div>
 
-            <a class="mini-link" href="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires" target="_blank" rel="noopener">
+            <a class="mini-link" id="mapLink" href="https://www.google.com/maps?q=Av.%20Agustin%20Alvarez%2025%2C%209%20de%20Julio%2C%20Buenos%20Aires" target="_blank" rel="noopener">
               Abrir en Google Maps →
             </a>
           </div>
@@ -809,8 +874,13 @@
 
   <footer id="footer">
     <div class="wrap footer-inner">
-      <div>© <span id="y"></span> <span class="ob-font">OPEN BOX</span></div>
-      <div>
+      <div class="footer-main">
+        <span class="ob-font">OPEN BOX</span>
+        <span>©</span>
+        <span id="y"></span>
+      </div>
+
+      <div class="footer-credit">
         <a class="credit-cyan" href="https://ciborg347.onrender.com" target="_blank" rel="noopener">Creado y diseñado por Ciborg 347</a>
       </div>
     </div>
@@ -838,6 +908,22 @@
       }, { root: null, threshold: 0.01 });
 
       io.observe(footer);
+    })();
+
+    (function(){
+      var ua = navigator.userAgent || "";
+      var isIG = /Instagram/i.test(ua);
+      if(!isIG) return;
+
+      var mapWrap = document.getElementById("mapWrap");
+      var mapLink = document.getElementById("mapLink");
+      if(!mapWrap || !mapLink) return;
+
+      mapWrap.innerHTML =
+        '<a class="map-fallback" href="' + mapLink.href + '" target="_blank" rel="noopener" aria-label="Abrir mapa">' +
+          '<img src="https://iili.io/qJugOVS.png" alt="Mapa" />' +
+        '</a>';
+      mapWrap.className = "";
     })();
 
     (function(){
