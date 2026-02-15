@@ -153,7 +153,6 @@
     .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
     .nav-actions{display:flex;align-items:center;gap:10px;}
-
     .burger{
       width:44px;height:44px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.16);
@@ -244,12 +243,12 @@
       background:#000;
       opacity:0.98;
     }
-
-    /* CAMBIO 1: VELO 15% EN EL HERO (APENAS) */
     .hero-left::after{
       content:"";
       position:absolute;inset:0;pointer-events:none;
-      background:rgba(0,0,0,0.15);
+      background:
+        radial-gradient(900px 420px at 25% 20%, rgba(0,0,0,0.08), rgba(0,0,0,0.22)),
+        linear-gradient(to bottom, rgba(0,0,0,0.08), rgba(0,0,0,0.18));
     }
 
     .hero-content{
@@ -531,15 +530,6 @@
     .float-ig .t strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .float-ig .t span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-    /* CAMBIO 2: LOGO WHATSAPP ARRIBA DEL BOTON IG (SOLO DESKTOP) */
-    .ig-stack{display:flex;flex-direction:column;align-items:center;gap:8px;}
-    .wa-logo-top{
-      width:28px;height:28px;
-      object-fit:contain;
-      display:block;
-      filter:drop-shadow(0 10px 24px rgba(0,0,0,0.45));
-    }
-
     @media (max-width: 920px){
       main{padding-top:22px;}
       section{padding:26px 0;}
@@ -553,7 +543,6 @@
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
       .ig-header-btn{display:none;}
-      .ig-stack{display:none;}
       .hour-row{grid-template-columns: 112px 1fr;}
     }
 
@@ -583,10 +572,7 @@
       </a>
 
       <div class="nav-actions">
-        <div class="ig-stack">
-          <img class="wa-logo-top" src="https://iili.io/fm1NjzQ.jpg" alt="WhatsApp" />
-          <a class="btn btn-primary ig-header-btn" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Ver Instagram</a>
-        </div>
+        <a class="btn btn-primary ig-header-btn" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Ver Instagram</a>
 
         <button class="burger" id="burger" type="button" aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none">
@@ -730,6 +716,7 @@
 
     <section id="galeria">
       <div class="grid cards-2">
+        <!-- GALERIA PRIMERO -->
         <div class="card">
           <div class="card-pad">
             <span class="kicker">Galeria</span>
@@ -771,6 +758,7 @@
           </div>
         </div>
 
+        <!-- MAPA ULTIMO -->
         <div class="card" id="mapa">
           <div class="card-pad">
             <span class="kicker">Ubicacion</span>
