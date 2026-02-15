@@ -147,6 +147,32 @@
     .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);}
 
     .nav-actions{display:flex;align-items:center;gap:10px;}
+
+    /* Desktop nav links (mismo menu que burger) */
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 26px rgba(0,0,0,0.22);
+    }
+    .nav-link{
+      font-size:12px;
+      color:rgba(255,255,255,0.86);
+      padding:8px 10px;
+      border-radius:999px;
+      transition:background .15s ease, transform .15s ease;
+      white-space:nowrap;
+    }
+    .nav-link:hover{
+      background:rgba(255,255,255,0.08);
+      transform:translateY(-1px);
+    }
+
     .burger{
       width:44px;height:44px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.16);
@@ -157,7 +183,6 @@
       box-shadow:0 10px 26px rgba(0,0,0,0.35);
     }
     .burger svg{width:20px;height:20px;opacity:0.95;}
-
     .drawer-backdrop{
       position:fixed;inset:0;z-index:80;
       background:rgba(0,0,0,0.55);
@@ -556,50 +581,88 @@
     }
     .credit-cyan{color:#00e5ff !important;}
 
-    /* WhatsApp flotante (ARRIBA) */
-    .float-wa{
-      position: fixed;right:16px;bottom:76px;z-index:70;
-      width:48px;height:48px;border-radius:999px;
-      border:1px solid rgba(255,255,255,0.22);
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      backdrop-filter:blur(10px);
-      box-shadow:0 18px 44px rgba(0,0,0,0.45);
-      display:grid;place-items:center;
+    /* Flotantes (solo iconos + pill al desplegar) */
+    .float-stack{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:70;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+      max-width:calc(100vw - 32px);
       transition:opacity .15s ease, transform .15s ease;
-      color:#0b0b0d;
     }
-    .float-wa:hover{filter:brightness(1.06);}
-    .float-wa.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
-    .float-wa svg{width:22px;height:22px;display:block;color:#0b0b0d;}
+    .float-stack.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
 
-    /* Instagram flotante (ABAJO, juntos) */
-    .float-ig{
-      position: fixed;right:16px;bottom:16px;z-index:70;
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:999px;
+    .float-item{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      justify-content:flex-end;
+      user-select:none;
+    }
+
+    .float-icon{
+      width:46px;height:46px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.22);
+      box-shadow:0 18px 44px rgba(0,0,0,0.45);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+
+    .float-pill{
+      display:flex;
+      align-items:center;
+      height:40px;
+      padding:0 12px;
+      border-radius:999px;
       border:1px solid rgba(255,255,255,0.18);
       background:rgba(0,0,0,0.62);
       backdrop-filter:blur(10px);
       box-shadow:0 18px 44px rgba(0,0,0,0.45);
       color:rgba(255,255,255,0.92);
-      max-width:calc(100vw - 32px);
+      font-size:13px;
+      font-weight:800;
+
+      opacity:0;
+      transform:translateX(8px);
+      pointer-events:none;
       transition:opacity .15s ease, transform .15s ease;
-      text-transform:none;
-      letter-spacing:0;
-      font-weight:700;
+      white-space:nowrap;
     }
-    .float-ig:hover{background:rgba(0,0,0,0.72);}
-    .float-ig.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
-    .ig-badge{
-      width:30px;height:30px;border-radius:10px;display:grid;place-items:center;
+
+    .float-item.is-open .float-pill{
+      opacity:1;
+      transform:translateX(0);
+      pointer-events:auto;
+    }
+
+    /* Desktop: hover tambien despliega */
+    @media (hover:hover){
+      .float-item:hover .float-pill{
+        opacity:1;
+        transform:translateX(0);
+        pointer-events:auto;
+      }
+    }
+
+    /* WhatsApp */
+    .wa-icon{
+      background:linear-gradient(135deg, #25D366, #128C7E);
+      color:#0b0b0d;
+    }
+    .wa-icon svg{width:20px;height:20px;display:block;color:#0b0b0d;}
+
+    /* Instagram */
+    .ig-icon{
       background:linear-gradient(135deg, rgba(245,133,41,0.98), rgba(221,42,123,0.95), rgba(129,52,175,0.95), rgba(81,91,212,0.95));
-      border:1px solid rgba(255,255,255,0.18);
-      flex:0 0 auto;
+      color:#fff;
     }
-    .ig-badge svg{width:16px;height:16px;color:#fff;display:block;}
-    .ig-text{display:flex;flex-direction:column;line-height:1.05;min-width:0;}
-    .ig-text strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;color:rgba(255,255,255,0.95);}
-    .ig-text span{font-size:12px;color:rgba(255,255,255,0.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;}
+    .ig-icon svg{width:18px;height:18px;display:block;color:#fff;}
 
     @media (max-width: 920px){
       main{padding-top:22px;}
@@ -613,14 +676,19 @@
       .map iframe{height:230px;}
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
+      .nav-links{display:none;}
       .hour-row{grid-template-columns: 112px 1fr;}
+    }
+
+    @media (min-width: 921px){
+      .burger{display:none;}
+      .nav-links{display:flex;}
     }
 
     @media (max-width: 520px){
       .slide{height:300px;padding:10px;}
       .btn{padding:10px 12px;}
-      .float-ig{right:12px;bottom:12px;}
-      .float-wa{right:12px;bottom:72px;}
+      .float-stack{right:12px;bottom:12px;}
     }
 
     @media (max-width: 420px){
@@ -643,6 +711,14 @@
       </a>
 
       <div class="nav-actions">
+        <nav class="nav-links" aria-label="Navegacion">
+          <a class="nav-link" href="#inicio">Inicio</a>
+          <a class="nav-link" href="#servicios">Servicios</a>
+          <a class="nav-link" href="#horarios">Horarios</a>
+          <a class="nav-link" href="#galeria">Galeria</a>
+          <a class="nav-link" href="#mapa">Mapa</a>
+        </nav>
+
         <button class="burger" id="burger" type="button" aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M5 7h14M5 12h14M5 17h14" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -878,45 +954,41 @@
     </div>
   </footer>
 
-  <a class="float-ig" id="floatIg" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Instagram">
-    <span class="ig-badge" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="white" stroke-width="1.6"/>
-        <path d="M12 16.2A4.2 4.2 0 1 0 12 7.8a4.2 4.2 0 0 0 0 8.4Z" stroke="white" stroke-width="1.6"/>
-        <path d="M17.3 6.7h.01" stroke="white" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </span>
-    <span class="ig-text">
-      <strong>@gimnasio.openbox</strong>
-      <span>Seguir</span>
-    </span>
-  </a>
+  <!-- Flotantes: WhatsApp arriba / Instagram abajo -->
+  <div class="float-stack" id="floatStack" aria-label="Accesos flotantes">
+    <div class="float-item" data-float="wa">
+      <a class="float-pill" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">Escribinos</a>
+      <a class="float-icon wa-icon" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+      </a>
+    </div>
 
-  <a class="float-wa" id="floatWa" href="https://wa.me/5492317533923?text=Hola%21%20Quiero%20info%20sobre%20clases%20y%20horarios.%20Gracias." target="_blank" rel="noopener" aria-label="WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-    </svg>
-  </a>
+    <div class="float-item" data-float="ig">
+      <a class="float-pill" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Seguinos en Instagram">Seguinos</a>
+      <a class="float-icon ig-icon" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="white" stroke-width="1.6"/>
+          <path d="M12 16.2A4.2 4.2 0 1 0 12 7.8a4.2 4.2 0 0 0 0 8.4Z" stroke="white" stroke-width="1.6"/>
+          <path d="M17.3 6.7h.01" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
     (function(){
       var footer = document.getElementById("footer");
-      var floatWa = document.getElementById("floatWa");
-      var floatIg = document.getElementById("floatIg");
-      if(!footer) return;
+      var floatStack = document.getElementById("floatStack");
+      if(!footer || !floatStack) return;
 
       var io = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
-          if(floatWa){
-            if(e.isIntersecting) floatWa.classList.add("is-hidden");
-            else floatWa.classList.remove("is-hidden");
-          }
-          if(floatIg){
-            if(e.isIntersecting) floatIg.classList.add("is-hidden");
-            else floatIg.classList.remove("is-hidden");
-          }
+          if(e.isIntersecting) floatStack.classList.add("is-hidden");
+          else floatStack.classList.remove("is-hidden");
         });
       }, { root: null, threshold: 0.01 });
 
@@ -937,6 +1009,56 @@
           '<img src="https://iili.io/qJugOVS.png" alt="Mapa" />' +
         '</a>';
       mapWrap.className = "";
+    })();
+
+    (function(){
+      var stack = document.getElementById("floatStack");
+      if(!stack) return;
+
+      var items = Array.prototype.slice.call(stack.querySelectorAll(".float-item"));
+      var closeTimer = null;
+
+      function closeAll(){
+        items.forEach(function(it){ it.classList.remove("is-open"); });
+      }
+
+      function openItem(it){
+        closeAll();
+        it.classList.add("is-open");
+        if(closeTimer) clearTimeout(closeTimer);
+        closeTimer = setTimeout(function(){
+          it.classList.remove("is-open");
+        }, 2200);
+      }
+
+      items.forEach(function(it){
+        var icon = it.querySelector(".float-icon");
+        if(!icon) return;
+
+        icon.addEventListener("click", function(e){
+          e.preventDefault();
+          openItem(it);
+        });
+
+        icon.addEventListener("touchstart", function(e){
+          e.preventDefault();
+          openItem(it);
+        }, {passive:false});
+      });
+
+      document.addEventListener("click", function(e){
+        if(stack.contains(e.target)) return;
+        closeAll();
+      }, true);
+
+      document.addEventListener("touchstart", function(e){
+        if(stack.contains(e.target)) return;
+        closeAll();
+      }, {passive:true});
+
+      document.addEventListener("keydown", function(e){
+        if(e.key === "Escape") closeAll();
+      });
     })();
 
     (function(){
