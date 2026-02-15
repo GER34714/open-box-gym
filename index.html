@@ -176,6 +176,16 @@
     .btn-primary:hover{background:linear-gradient(135deg, rgba(124,92,255,1), rgba(32,227,178,0.95));}
 
     .nav-actions{display:flex;align-items:center;gap:10px;}
+
+    /* WHATSAPP LOGO ARRIBA DEL BOTON IG */
+    .ig-stack{display:flex;flex-direction:column;align-items:center;gap:8px;}
+    .wa-logo-top{
+      width:28px;height:28px;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 10px 24px rgba(0,0,0,0.45));
+    }
+
     .burger{
       width:44px;height:44px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.16);
@@ -267,10 +277,12 @@
       background:#000;
       opacity:1;
     }
+
+    /* OPACIDAD (VELO) 15% */
     .hero-left::after{
       content:"";
       position:absolute;inset:0;pointer-events:none;
-      background:transparent;
+      background:rgba(0,0,0,0.15);
     }
 
     .hero-content{
@@ -610,6 +622,7 @@
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
       .ig-header-btn{display:none;}
+      .ig-stack{display:none;}
       .hour-row{grid-template-columns: 112px 1fr;}
       .footer-inner{grid-template-columns:1fr;justify-items:center;text-align:center;}
       .footer-right{justify-self:center;text-align:center;}
@@ -645,7 +658,10 @@
       </a>
 
       <div class="nav-actions">
-        <a class="btn btn-primary ig-header-btn" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Ver Instagram</a>
+        <div class="ig-stack">
+          <img class="wa-logo-top" src="https://iili.io/fm1NjzQ.jpg" alt="WhatsApp" />
+          <a class="btn btn-primary ig-header-btn" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">Ver Instagram</a>
+        </div>
 
         <button class="burger" id="burger" type="button" aria-label="Abrir menu">
           <svg viewBox="0 0 24 24" fill="none">
