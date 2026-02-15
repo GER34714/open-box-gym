@@ -294,7 +294,6 @@
       position:relative;
       overflow:hidden;
     }
-    /* CAMBIO: menos opacidad (casi nada) para que se vea bien el video */
     .hero-panel::before{
       content:"";
       position:absolute;
@@ -379,7 +378,6 @@
     }
     .map iframe{width:100%;height:230px;border:0;display:block;}
 
-    /* CAMBIO: mapita para Instagram in-app */
     .map-ig{
       display:none;
       width:100%;
@@ -872,7 +870,7 @@
       <div></div>
 
       <div class="footer-center">
-        © <span id="y"></span> <span class="ob-font">Open Box</span>
+        <span class="ob-font">Open Box</span> © <span id="y"></span>
       </div>
 
       <div class="footer-right">
@@ -925,7 +923,6 @@
       });
     })();
 
-    /* CAMBIO: si es navegador de Instagram, mostrar imagen mapita y ocultar iframe */
     (function(){
       var ua = navigator.userAgent || "";
       var isIG = /Instagram/i.test(ua);
@@ -996,7 +993,6 @@
       function setTransform(){
         track.style.transform = "translateX(" + (-idx * 100) + "%)";
         updateDots();
-
         pauseAllVideos();
         playActiveVideo();
       }
