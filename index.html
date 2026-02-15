@@ -168,15 +168,25 @@
     .header-wa:hover{filter:brightness(1.06);}
     .header-wa svg{width:18px;height:18px;display:block;color:#0b0b0d;}
 
+    /* Instagram mas protagonista */
     .header-ig{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      font-weight:900;
+      font-weight:950;
       text-transform:uppercase;
-      letter-spacing:0.6px;
+      letter-spacing:0.8px;
+      background:linear-gradient(135deg, rgba(245,133,41,0.95), rgba(221,42,123,0.92), rgba(129,52,175,0.92), rgba(81,91,212,0.92));
+      border-color:rgba(255,255,255,0.22);
+      color:#0b0b0d;
     }
+    .header-ig:hover{filter:brightness(1.06);}
     .ig-icon{width:18px;height:18px;display:block;}
+    .ig-handle{
+      font-weight:950;
+      letter-spacing:0.4px;
+      text-transform:none;
+    }
 
     .drawer-backdrop{
       position:fixed;inset:0;z-index:80;
@@ -576,9 +586,10 @@
     }
     .credit-cyan{color:#00e5ff !important;}
 
+    /* WhatsApp flotante mas chico */
     .float-wa{
       position: fixed;right:16px;bottom:16px;z-index:70;
-      width:56px;height:56px;border-radius:999px;
+      width:48px;height:48px;border-radius:999px;
       border:1px solid rgba(255,255,255,0.22);
       background: linear-gradient(135deg, #25D366, #128C7E);
       backdrop-filter:blur(10px);
@@ -589,7 +600,7 @@
     }
     .float-wa:hover{filter:brightness(1.06);}
     .float-wa.is-hidden{opacity:0;transform:translateY(12px);pointer-events:none;}
-    .float-wa svg{width:26px;height:26px;display:block;color:#0b0b0d;}
+    .float-wa svg{width:22px;height:22px;display:block;color:#0b0b0d;}
 
     @media (max-width: 920px){
       main{padding-top:22px;}
@@ -604,16 +615,19 @@
       .slide{height:340px;padding:12px;}
       .burger{display:grid;}
       .hour-row{grid-template-columns: 112px 1fr;}
-      .header-cta{display:none;}
+
+      /* antes lo escondia: ahora lo mostramos para que sigan la cuenta */
+      .header-cta{display:inline-flex;}
     }
 
     @media (max-width: 520px){
       .slide{height:300px;padding:10px;}
+      .header-cta{gap:8px;}
+      .btn{padding:10px 12px;}
     }
 
     @media (max-width: 420px){
       .brand img{width:40px;height:40px;}
-      .btn{padding:10px 12px;}
       .float-wa{right:12px;bottom:12px;}
     }
   </style>
@@ -641,13 +655,13 @@
             WhatsApp
           </a>
 
-          <a class="btn header-ig" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener">
+          <a class="btn header-ig" href="https://www.instagram.com/gimnasio.openbox/" target="_blank" rel="noopener" aria-label="Seguir en Instagram">
             <svg class="ig-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9A4.7 4.7 0 0 1 16.5 21.2h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8Z" stroke="currentColor" stroke-width="1.8"/>
               <path d="M12 16.2A4.2 4.2 0 1 0 12 7.8a4.2 4.2 0 0 0 0 8.4Z" stroke="currentColor" stroke-width="1.8"/>
               <path d="M17.3 6.7h.01" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
             </svg>
-            SEGUINOS
+            SEGUINOS <span class="ig-handle">@gimnasio.openbox</span>
           </a>
         </div>
 
